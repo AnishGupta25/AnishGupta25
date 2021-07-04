@@ -29,6 +29,19 @@ public class main{
         return ans;
     }
 
-   
+    public static int getValueIndecimal(int n, int b) {
+        int ans = 0;
+        int count = 0;
+        int temp = n;
+        
+        while (temp > 0) {
+          int val = temp % 10;
+    
+          ans += val * (int)Math.pow(b , count);
+          count++;
+          temp /= 10;
+        }
+        return ans;
+      }
 
 }
