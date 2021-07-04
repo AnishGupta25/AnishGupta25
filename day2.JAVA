@@ -15,6 +15,20 @@ public class main{
         return count;
     }
 
-    
+    public static int getValueInBase(int n, int b){
+        int pow = 1;
+        int ans = 0;
+        
+        while(n > 0){
+            int val = n % b;
+            ans += val * pow;
+            
+            pow *= 10;
+            n /= b;
+        }
+        return ans;
+    }
+
+   
 
 }
