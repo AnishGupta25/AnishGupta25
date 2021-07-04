@@ -42,6 +42,12 @@ public class main{
           temp /= 10;
         }
         return ans;
-      }
+    }
+
+    public static int AnybasetoAnybase() {
+        int dec = getValueIndecimal(n , sourceBase);
+        int ans = getValueInBase(dec , destBase);
+        System.out.print(ans);   
+    }
 
 }
