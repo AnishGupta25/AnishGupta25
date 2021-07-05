@@ -76,6 +76,40 @@ public static void main(String[] args) {
         }
     
         return ans;
+    }
+    
+    public static int getProduct(int b, int n1, int n2) {
+        int dval1 = getValueIndecimal(n1, b);
+        int dval2 = getValueIndecimal(n2, b);
+        int mul = dval1 * dval2;
+        int cval = getValueInBase(mul, b);
+        return cval;
       }
     
+      public static int getValueIndecimal(int n, int b) {
+        int dec = 0;
+        int temp;
+        int count = 0;
+    
+        while (n > 0) {
+          temp = n % 10;
+          n = n / 10;
+          dec = dec + temp * (int)Math.pow(b, count);
+          count++;
+        }
+        return dec;
+      }
+      public static int getValueInBase(int n, int b) {
+        int temp;
+        int rv = 0;
+        int pow = 1;
+    
+        while (n > 0) {
+          temp = n % b;
+          rv = rv + temp * pow;
+          n = n / b;
+          pow = pow * 10;
+        }
+        return rv;
+    }
 }
