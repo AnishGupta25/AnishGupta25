@@ -43,4 +43,18 @@ public static void findElement(int arr[] , int d , int n) {
     }
 
     System.out.print("-1");
-  }
+}
+
+public static void barchart(int arr[], int n, int max) {
+    for (int i = 1; i <= max; i++) {
+      for (int j = 0; j < n; j++) {
+        if (max - arr[j] < i) {
+          System.out.print("*\t");
+        }
+        else {
+          System.out.print("\t");
+        }
+      }
+      System.out.println();
+    }
+}
