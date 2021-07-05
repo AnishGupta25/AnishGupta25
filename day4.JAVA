@@ -4,7 +4,7 @@ public static void main(String[] args) throws Exception {
 
     int arr[] = new int[n];
     for (int i = 0; i < n; i++) {
-      arr[i] = scn.nextInt();
+        arr[i] = scn.nextInt();
     }
 
     int max = maxofarr(arr, n);
@@ -12,9 +12,9 @@ public static void main(String[] args) throws Exception {
 
     int span = max - min;
     System.out.print(span);
-  }
+}
 
-  public static int maxofarr(int arr[], int n) {
+public static int maxofarr(int arr[], int n) {
     int max = Integer.MIN_VALUE;
     for(int i = 0; i < n; i++){
         if(arr[i] > max){
@@ -22,9 +22,9 @@ public static void main(String[] args) throws Exception {
         }
     }
     return max;
-  }
+}
 
-  public static int minofarr(int arr[], int n) {
+public static int minofarr(int arr[], int n) {
     int min = Integer.MAX_VALUE;
     for(int i = 0; i < n; i++){
         if(arr[i] < min){
@@ -32,4 +32,15 @@ public static void main(String[] args) throws Exception {
         }
     }
     return min;
+}
+
+public static void findElement(int arr[] , int d , int n) {
+    for (int i = 0; i < n; i++) {
+      if (arr[i] == d) {
+        System.out.print(i);
+        return;
+      }
+    }
+
+    System.out.print("-1");
   }
