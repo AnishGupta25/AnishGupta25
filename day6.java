@@ -54,4 +54,27 @@ public class day6 {
         }
         return res.next;
     }
+
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode res = new ListNode(0);
+        ListNode r = res;
+        int carry = 0;
+        while(l1 != null || l2 != null || carry > 0){
+            int val1 = l1 != null ? l1.val : 0;
+            int val2 = l2 != null ? l2.val : 0;
+            
+            int sum = val1 + val2 + carry;
+            carry = sum / 10;
+            int rem = sum % 10;
+            
+            ListNode node = new ListNode(rem);
+            r.next = node;
+            
+            if(l1 != null) l1 = l1.next;
+            if(l2 != null) l2 = l2.next;
+            r = r.next;
+        }
+        
+        return res.next;
+    }
 }
