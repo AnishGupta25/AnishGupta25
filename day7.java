@@ -26,4 +26,12 @@ public class day7 {
         pdi(n-1);
         System.out.println(n);
     }
+
+    public static int factorial(int n){
+        if(n == 0){
+            return 1;
+        }
+        int fact = factorial(n-1) * n;
+        return fact;
+    }
 }
