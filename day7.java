@@ -88,4 +88,13 @@ public class day7 {
         System.out.println(arr[idx]);
         displayArr(arr, idx + 1);
     }
+
+    public static void displayArrReverse(int[] arr, int idx) {
+        if (idx < 0) {
+          return;
+        }
+    
+        System.out.println(arr[idx]);
+        displayArrReverse(arr, idx - 1);
+    }
 }
