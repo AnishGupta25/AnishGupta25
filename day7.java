@@ -34,4 +34,13 @@ public class day7 {
         int fact = factorial(n-1) * n;
         return fact;
     }
+
+    public static int power(int x, int n){
+        if(n == 0){
+            return 1;
+        }
+        int k = power(x , n - 1);
+        int res = x * k;
+        return res;
+    }
 }
