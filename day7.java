@@ -43,4 +43,17 @@ public class day7 {
         int res = x * k;
         return res;
     }
+
+    public static int lpower(int x, int n) {
+        if (n == 0) {
+          return 1;
+        }
+        
+        int k = lpower(x , n / 2);
+        int res =  k * k;
+        if(n % 2 == 1){
+            res *= x;
+        }
+        return res;
+    }
 }
