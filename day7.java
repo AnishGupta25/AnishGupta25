@@ -97,4 +97,15 @@ public class day7 {
         System.out.println(arr[idx]);
         displayArrReverse(arr, idx - 1);
     }
+
+    public static int maxOfArray(int[] arr, int idx) {
+        if (idx < 0) {
+          return 0;
+        }
+        int max = maxOfArray(arr, idx - 1);
+        if(arr[idx] > max){
+            max = arr[idx];
+        }
+        return max;
+    }
 }
