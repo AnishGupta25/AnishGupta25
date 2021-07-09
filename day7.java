@@ -8,5 +8,12 @@ public class day7 {
         printDecreasing(n - 1);
     }
 
-    
+    public static void printIncreasing(int n){
+        if(n == 0){
+            return;
+        }
+        
+        printIncreasing(n - 1);
+        System.out.println(n);
+    }
 }
