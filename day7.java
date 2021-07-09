@@ -79,4 +79,13 @@ public class day7 {
         System.out.println(n + "[" + t1id + " -> " + t2id + "]");
         toh(n-1 , t3id , t2id , t1id);
     }
+
+    public static void displayArr(int[] arr, int idx) {
+        if (idx == arr.length) {
+          return;
+        }
+    
+        System.out.println(arr[idx]);
+        displayArr(arr, idx + 1);
+    }
 }
