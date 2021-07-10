@@ -25,5 +25,22 @@ public class day8 {
           int fst = firstIndex(arr, idx - 1, x);
           return fst;
         }
-    }    
+    }   
+    
+    public static int[] allIndices(int[] arr, int x, int idx, int fsf) {
+        if (idx == arr.length) {
+          int a[] = new int[fsf];
+          return a;
+        }
+    
+        if (arr[idx] == x) {
+          int a[] = allIndices(arr, x, idx + 1, fsf + 1);
+          a[fsf] = idx;
+          return a;
+        }
+        else {
+          int a[] = allIndices(arr, x, idx + 1, fsf);
+          return a;
+        }
+    }
 }
