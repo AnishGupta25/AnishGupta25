@@ -15,5 +15,24 @@ public class day10{
         }
     }
  
+    public static Node construct(int input[]){
+        Node root = new Node(input[0]);
+ 
+        Stack<Node> st = new Stack<>();
+        st.push(root);
+ 
+        for(int i = 1 ; i < input.length ; i++){
+            if(input[i] == -1){
+                st.pop();
+            }else{
+                Node newNode = new Node(input[i]);
+                st.peek().children.add(newNode);
+                st.push(newNode);
+            }
+        }
+ 
+        return root;
+    }
+ 
     
 }
