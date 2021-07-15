@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class day12 {
     public double Pow(double x, int n) {
         if(n == 0) return 1;
@@ -79,5 +81,26 @@ public class day12 {
             len = res.length();
         }
         return len;
+    }
+    // merge 2 sorted arrays without using extra space
+    public void merge(int arr1[], int arr2[], int n, int m) {
+        int i = 0 , j = 0, k = arr1.length - 1;
+        
+        while(i < arr1.length && j < arr2.length){
+            int val1 = arr1[i];
+            int val2 = arr2[j];
+            if(val1 <= val2){
+                i++;
+            }
+            else{
+                arr2[j] = arr1[k];
+                arr1[k] = val2;
+                j++;
+                k--;
+            }
+        }
+        
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
     }
 }
