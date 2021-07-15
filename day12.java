@@ -67,4 +67,17 @@ public class day12 {
         
         return median;
     }
+
+    public int lengthOfLastWord(String s) {
+        String str[] = s.split(" ");
+        int len = 0;
+        if(str.length == 0){
+            return 0;
+        }
+        else{
+            String res = str[str.length - 1];
+            len = res.length();
+        }
+        return len;
+    }
 }
