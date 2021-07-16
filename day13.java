@@ -121,4 +121,35 @@ public class day13 {
     
     return ht;
   }
+
+  public static void iterativePrePostInTraversal(Node node) {
+    String pre = "";
+    String inorder = "";
+    String post = "";
+    Stack<Pair> st = new Stack<>();
+    st.push(new Pair(node , -1));
+    
+    while(st.size() > 0){
+        Pair top = st.peek();
+        
+        if(top.state == -1){
+            pre += top.node.data + " ";
+            top.state++;
+            if(top.node.left != null) st.push(new Pair(top.node.left , -1));
+            
+        }
+        else if(top.state == 0){
+            inorder += top.node.data + " ";
+            top.state++;
+            if(top.node.right != null) st.push(new Pair(top.node.right , -1));
+        }
+        else{
+            post += top.node.data + " ";
+            st.pop();
+        }
+    }
+    
+    System.out.print(pre +"\n"+ inorder +"\n"+post);
+
+  }
 }
