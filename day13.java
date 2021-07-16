@@ -68,4 +68,57 @@ public class day13 {
     
     System.out.print(pre + "\n" + post);
   }
+
+  public static int size(Node node) {
+    int count = 0;
+    if(node == null){
+        return 0;
+    }
+    
+    count += size(node.left);
+    count += size(node.right);
+    
+    count++;
+    
+    return count;
+  }
+
+  public static int sum(Node node) {
+    int sum = 0;
+    if(node == null){
+        return 0;
+    }
+    
+    sum += sum(node.left);
+    sum += sum(node.right);
+    
+    sum += node.data;
+    return sum;
+  }
+
+  public static int max(Node node) {
+    int max = Integer.MIN_VALUE;
+    
+    if(node == null){
+        return Integer.MIN_VALUE;
+    }
+    max = max(node.left);
+    max = max(node.right);
+    
+    max = Math.max(node.data , max);
+    return max;
+  }
+
+  public static int height(Node node) {
+    if(node == null){
+        return -1;
+    }
+    
+    int lht = height(node.left);
+    int rht = height(node.right);
+    
+    int ht = Math.max(lht , rht) + 1;
+    
+    return ht;
+  }
 }
