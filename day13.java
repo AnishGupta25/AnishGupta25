@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 public class day13 {
   static int floor;
   static int ceil;
@@ -29,5 +31,41 @@ public class day13 {
       k--;
     }
     return factor;
+  }
+
+  static class Pair {
+    Node node;
+    int state;
+
+    Pair(Node node, int state) {
+      this.node = node;
+      this.state = state;
+    }
+  }
+  public static void IterativePreandPostOrder(Node node) {
+    Stack<Pair> st = new Stack<>();
+    st.push(new Pair(node, -1));
+
+    String pre = "";
+    String post = "";
+
+    while (st.size() > 0) {
+        Pair top = st.peek();
+        
+        if(top.state == -1){
+            pre += top.node.data + " ";
+            top.state++;
+        }
+        else if(top.state == top.node.children.size()){
+            post += top.node.data + " ";
+            st.pop();
+        }
+        else{
+            st.push(new Pair(top.node.children.get(top.state) , -1));
+            top.state++;
+        }
+    }
+    
+    System.out.print(pre + "\n" + post);
   }
 }
