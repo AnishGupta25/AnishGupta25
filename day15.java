@@ -36,4 +36,20 @@ public class day15 {
         }
         return rev;
     }
+    int maxSum = Integer.MIN_VALUE;
+        int sum = 0;
+        for(int i = 0; i < nums.length; i++){
+            if(i == 0){
+                sum = nums[i];
+            }
+            else{
+                sum = Math.max(nums[i] , sum + nums[i]);
+            }
+            
+            if(sum > maxSum){
+                maxSum = sum;
+            }
+        }
+        return maxSum;
+    }
 }
