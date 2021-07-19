@@ -31,4 +31,48 @@ public class day16 {
         
         return dp[n];
     }
+
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        List<TreeNode> nodep = NodetoRoot(root , p);
+        int n = nodep.size();
+        List<TreeNode> nodeq = NodetoRoot(root , q);
+        int m = nodeq.size();
+        
+        int i = n - 1, j = m - 1;
+        
+        while(i >= 0 && j >= 0){
+            TreeNode D1 = nodep.get(i);
+            TreeNode D2 = nodeq.get(j);
+            if(D1.val == D2.val){
+                i--;
+                j--;
+            }
+            else break;   
+        }
+        return nodep.get(i+1);
+    }
+    
+    public static List<TreeNode> NodetoRoot(TreeNode root, TreeNode node){
+        if(root == null) return new ArrayList<>();
+        
+        if(root.val == node.val){
+            List<TreeNode> res = new ArrayList<>();
+            res.add(root);
+            return res;
+        }
+        
+        List<TreeNode> lres = NodetoRoot(root.left , node);
+        if(lres.size() > 0){
+            lres.add(root);
+            return lres;
+        }
+        
+        List<TreeNode> rres = NodetoRoot(root.right , node);
+        if(rres.size() > 0){
+            rres.add(root);
+            return rres;
+        }
+        
+        return new ArrayList<>();
+    }
 }
