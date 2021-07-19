@@ -80,5 +80,6 @@ public class day15 {
         }
         
         return t1;
-    }
+    }.3
+    
 }
