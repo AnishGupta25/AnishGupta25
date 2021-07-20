@@ -53,4 +53,19 @@ public class day17 {
             this.bst = bst;
         }
     }
+
+    int maxSubarraySum(int arr[], int n){
+        int MaxSum = Integer.MIN_VALUE, sum = 0;
+        for(int i = 0; i < n; i++){
+            sum = sum+arr[i];
+            if(sum > MaxSum){
+                MaxSum = sum;
+            }
+            if(sum < 0){
+                sum = 0;
+            }
+        }
+        
+        return MaxSum;
+    }
 }
