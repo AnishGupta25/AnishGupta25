@@ -50,4 +50,22 @@ public class day19 {
             this.state = state;
         }
     }
+
+    public ListNode deleteDuplicates(ListNode head) {
+        if(head == null || head.next == null) return head;
+        ListNode res = new ListNode(head.val);
+        ListNode node = res;
+        ListNode prev = head.next;
+        while(prev != null){
+            if(prev.val == node.val){
+                prev = prev.next;
+            }
+            else{
+                ListNode temp = new ListNode(prev.val);
+                node.next = temp;
+                node = node.next;
+            }
+        }
+        return res;
+    }
 }
