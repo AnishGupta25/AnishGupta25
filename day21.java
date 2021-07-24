@@ -22,7 +22,7 @@ public class day21 {
         }
     }
     public static void main(String[] args) {
-        Scanner  scn = new Scanner(System.in);
+        Scanner scn = new Scanner(System.in);
  
         int vtces = scn.nextInt();
         int edges = scn.nextInt();
@@ -43,6 +43,29 @@ public class day21 {
         }
  
         display(graph);        
+    }
+
+    public static boolean hasPath(ArrayList<Edge>[] graph , int src , int dest) {
+        boolean arr[] = new boolean[graph.length];
+        
+        boolean path =  hasPathHelper(graph , src , dest , arr);
+        
+        return path;
+    }
+      
+    public static boolean hasPathHelper(ArrayList<Edge>[] graph , int src , int dest , boolean arr[]){
+        if(src == dest) return true;
+          
+        arr[src] = true;
+        
+        for(Edge e : graph[src]){
+            if(arr[e.nbr] == false){
+                boolean res = hasPathHelper(graph, e.nbr, dest, arr);
+                if(res) return true;
+            }
+        }
+        
+        return false;
     }
 }
  
