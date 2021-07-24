@@ -67,6 +67,28 @@ public class day21 {
         
         return false;
     }
+
+    public static void printallPath(ArrayList<Edge>[] graph , int src , int dest) {
+        boolean arr[] = new boolean[graph.length];
+        printallPathHelper(graph , src , dest , arr , "");
+        // return path;
+    }
+      
+    public static void printallPathHelper(ArrayList<Edge>[] graph , int src , int dest , boolean arr[], String psf){
+        if(src == dest){
+            System.out.println(psf+src);
+            return;
+        }
+          
+        arr[src] = true;
+        
+        for(Edge e : graph[src]){
+            if(arr[e.nbr] == false){
+                printallPathHelper(graph, e.nbr, dest, arr, psf+src);
+                arr[e.nbr] = false;
+            }
+        }
+    }
 }
  
 /*
