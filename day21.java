@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Stack;
  
 public class day21 {
     public static class Edge{
@@ -86,6 +87,35 @@ public class day21 {
             if(arr[e.nbr] == false){
                 printallPathHelper(graph, e.nbr, dest, arr, psf+src);
                 arr[e.nbr] = false;
+            }
+        }
+    }
+
+    public static class dsfPair{
+        int vtx;
+        String psf;
+        dsfPair(int vtx , String psf){
+            this.vtx = vtx;
+            this.psf = psf;
+        }
+    }
+      
+    public static void DFS(ArrayList<Edge>[] graph , int src){
+        
+        boolean visited[] = new boolean[graph.length];
+        Stack<dsfPair> st = new Stack<>();
+        st.push(new dsfPair(src , src+""));
+        
+        while(st.size() > 0){
+            dsfPair top = st.pop();
+            if(visited[top.vtx] == false){
+                System.out.println(top.vtx+"@"+top.psf);
+                visited[top.vtx] = true;
+                for(Edge e : graph[top.vtx]){
+                    if(visited[e.nbr] == false){
+                        st.push(new dsfPair(e.nbr , top.psf+e.nbr));
+                    }
+                }
             }
         }
     }
