@@ -59,4 +59,22 @@ public class day22 {
         
         return head;
     }
+
+    public static boolean isConnected(ArrayList<Edge>[] graph){
+        boolean visited[] = new boolean[graph.length];
+        isConnectedHelper(graph , visited , 0);
+        for(int i = 0; i < graph.length; i++){
+            if(visited[i] == false) return false;
+        }
+        return true;
+    }
+      
+    public static void isConnectedHelper(ArrayList<Edge>[] graph , boolean[] visited, int vtx){
+        visited[vtx] = true;
+        for(Edge e : graph[vtx]){
+            if(!visited[e.nbr]){
+                isConnectedHelper(graph , visited , e.nbr);
+            }
+        }
+    }
 }
