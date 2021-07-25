@@ -36,4 +36,27 @@ public class day22 {
             this.bst = bst;
         }
     }
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if(head.next == null) return null;
+        ListNode temp = head;
+        ListNode ans = head;
+        
+        while(n > 0){
+            temp = temp.next;
+            n--;
+        }
+        
+        if(temp == null) return ans.next;
+        
+        while(temp.next != null){
+            temp = temp.next;
+            ans = ans.next;
+        }
+        
+        // ans.next = null;
+        ans.next = ans.next.next;
+        
+        return head;
+    }
 }
