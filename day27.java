@@ -20,14 +20,35 @@ public class day27 {
                 }
             }
         }
-      }
+    }
       
-      public static class BSFPair{
+    public static class BSFPair{
         int v;
         String path;
         BSFPair(int v , String path){
             this.v = v;
             this.path = path;
         }
+    }
+
+    public static boolean isCyclic(ArrayList<Edge>[] graph, int vtx, boolean[] visited) {
+        Queue<Integer> queue = new ArrayDeque<>();
+        queue.add(vtx);
+    
+        while (queue.size() > 0) {
+          int head = queue.remove();
+          if (visited[head] == true) return true;
+    
+          if (visited[head] != true) {
+            visited[head] = true;
+            for (Edge e : graph[head]) {
+              if (!visited[e.nbr]) {
+                queue.add(e.nbr);
+              }
+            }
+          }
+        }
+        return false;
+    }
       
 }
