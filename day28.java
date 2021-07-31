@@ -1,4 +1,6 @@
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class day28 {
@@ -50,5 +52,35 @@ public class day28 {
         
         if(st.size() > 0) return false;
         return true;
+    }
+
+    public static int Infection(ArrayList<Edge>[] graph, int src, int t) {
+        int[] visited = new int[graph.length];
+        Queue<Pair> queue = new ArrayDeque<>();
+        queue.add(new Pair(src, 1));
+        int count = 0;
+        while (queue.size() > 0) {
+          Pair head = queue.remove();
+          if(visited[head.vtx] != 0) continue;
+          if(visited[head.vtx] == 0){
+            visited[head.vtx] = head.toi;
+            if(head.toi > t) break;
+            count++;
+            for(Edge e : graph[head.vtx]){
+                if(visited[e.nbr] == 0){
+                    queue.add(new Pair(e.nbr , head.toi+1));
+                }
+            }
+          }
+        }
+        return count;
+    }
+    
+    public static class Pair {
+        int vtx, toi;
+        Pair(int vtx, int toi) {
+          this.vtx = vtx;
+          this.toi = toi;
+        }
     }
 }
