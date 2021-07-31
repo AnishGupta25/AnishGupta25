@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Stack;
+
 public class day28 {
     public int[] plusOne(int[] digits) {
         ArrayList<Integer> res = new ArrayList<>();
@@ -19,5 +22,33 @@ public class day28 {
             r[i] = res.get(i);
         }
         return r;
+    }
+
+    public boolean isValid(String s) {
+        int n = s.length();
+        char[] chars = s.toCharArray();
+        Stack<Character> st = new Stack<>();
+        st.push(s.charAt(0));
+        
+        for(int i = 1; i < n; i++){
+            char ch = chars[i];
+            
+            if(chars[i] == '(' || chars[i] == '{' || chars[i] == '['){
+                st.push(ch);
+            }
+            
+            else{
+                if(st.size() == 0) return false;
+                char pre = st.peek();
+                if(pre == '(' && chars[i] == ')') st.pop();
+                else if(pre == '[' && chars[i] == ']') st.pop();
+                else if(pre == '{' && chars[i] == '}') st.pop();
+                
+                else return false;
+            }
+        }
+        
+        if(st.size() > 0) return false;
+        return true;
     }
 }
