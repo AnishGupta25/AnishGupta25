@@ -83,4 +83,27 @@ public class day28 {
           this.toi = toi;
         }
     }
+
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor){
+        boolean[][] visited = new boolean[image.length][image[0].length];
+        int prev = image[sr][sc];
+        if(prev == newColor) return image;
+        floodFillHelper(image , sr , sc , newColor , visited , prev);
+        return image;
+    }
+    
+    public void floodFillHelper(int[][] image, int sr, int sc, int newColor , boolean[][] visited , int prev){
+        if(sr < 0 || sc < 0 || sr == image.length || sc == image[0].length) return;
+        if(image[sr][sc] != prev) return;
+        if(visited[sr][sc]) return;
+        if(!visited[sr][sc]){
+            image[sr][sc] = newColor;
+        }
+        visited[sr][sc] = true;
+        
+        floodFillHelper(image , sr - 1 , sc , newColor , visited , prev);
+        floodFillHelper(image , sr , sc + 1 , newColor , visited , prev);
+        floodFillHelper(image , sr + 1 , sc , newColor , visited , prev);
+        floodFillHelper(image , sr , sc - 1 , newColor , visited , prev);
+    }
 }
