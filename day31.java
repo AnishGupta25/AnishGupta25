@@ -15,4 +15,28 @@ public class day31 {
         }
         return pre;
     }
+
+    public int getLucky(String s, int k) {
+        int ans = convert(s);
+        for(int i = 0; i < k - 1; i++) {
+            ans = transform(ans);
+        }
+        return ans;
+    }
+    public int convert(String num) {
+        int ans = 0;
+        for(char ch : num.toCharArray()) {
+            ans += transform(ch - 'a' + 1);
+        }
+        return ans;
+    }
+    
+    public int transform(int num) {
+        int ans = 0;
+        while(num != 0) {
+            ans += num % 10;
+            num = num / 10;
+        }
+        return ans;
+    }
 }
