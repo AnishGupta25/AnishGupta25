@@ -34,4 +34,18 @@ public class day32 {
         
         return false;
     }
+
+    public boolean stoneGame(int[] piles) {
+        int odd = 0, even = 0;
+        for(int i = 0; i < piles.length; i++){
+            if(i % 2 == 0) even += piles[i];
+            else odd += piles[i];
+        }
+        
+        int Alex_Stones = Math.max(odd, even);
+        int Lee_Stones = Math.min(odd, even);
+        
+        if(Alex_Stones > Lee_Stones) return true;
+        return false;
+    }
 }
