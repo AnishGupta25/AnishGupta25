@@ -36,4 +36,19 @@ public class day34 {
         
         return true;
     }
+
+    public boolean areOccurrencesEqua(String s) {
+        int freq[] = new int[26];
+        
+        for(int i = 0; i < s.length(); i++){
+            char ch = s.charAt(i);
+            freq[ch - 'a']++;
+        }
+        int fre = freq[s.charAt(0) - 'a'];
+        
+        for(int num : freq){
+            if(num != 0 && num != fre) return false;
+        }
+        return true;
+    }
 }
