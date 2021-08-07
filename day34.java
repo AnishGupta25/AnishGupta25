@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class day34 {
@@ -51,4 +52,9 @@ public class day34 {
         }
         return true;
     }
+
+    public static int kthSmallest(int[] arr, int l, int r, int k){ 
+        Arrays.sort(arr);
+        return arr[k - 1];
+    } 
 }
