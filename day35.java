@@ -1,3 +1,5 @@
+import java.util.PriorityQueue;
+
 public class day35 {
     public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
         if(image[sr][sc] == newColor) return image;
@@ -19,5 +21,23 @@ public class day35 {
         flood(image , sr , sc + 1 , newColor , prev , visited);
         flood(image , sr , sc - 1 , newColor , prev , visited);
         flood(image , sr - 1 , sc , newColor , prev , visited);
+    }
+    
+    public ListNode mergeKLists(ListNode[] lists) {
+        PriorityQueue<ListNode> pq = new PriorityQueue<>((a , b) ->{
+            return a.val - b.val;
+        });
+        for(ListNode l : lists) if(l != null) pq.add(l);
+       
+        ListNode dummy = new ListNode(-1);
+        ListNode prev = dummy;
+        while(pq.size() > 0){
+            ListNode node = pq.remove();
+            prev.next = node;
+            prev = prev.next;
+            node = node.next;
+            if(node != null) pq.add(node);
+        }
+        return dummy.next;
     }
 }
