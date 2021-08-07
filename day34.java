@@ -1,5 +1,7 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.PriorityQueue;
 
 public class day34 {
     public int[] twoSum(int[] nums, int target) {
@@ -57,4 +59,36 @@ public class day34 {
         Arrays.sort(arr);
         return arr[k - 1];
     } 
+
+
+    public static ArrayList<Integer> mergeKSortedLists(ArrayList<ArrayList<Integer>> lists) {
+        ArrayList<Integer> rv = new ArrayList<>();
+        PriorityQueue<Pair> pq = new PriorityQueue<>();
+        for (int i = 0; i < lists.size(); i++) {
+          pq.add(new Pair(i, 0, lists.get(i).get(0)));
+        }
+        while (pq.size() > 0) {
+            Pair v = pq.remove();
+            rv.add(v.val);
+            if(v.validx+1 < lists.get(v.listidx).size()){
+                v.validx = v.validx + 1;
+                v.val = lists.get(v.listidx).get(v.validx);
+                pq.add(v);
+            }
+        }
+        return rv;
+      }
+    
+      public static class Pair implements Comparable<Pair> {
+        int listidx, validx, val;
+        Pair(int listidx, int validx, int val) {
+          this.listidx = listidx;
+          this.validx = validx;
+          this.val = val;
+        }
+        public int compareTo(Pair o) {
+          return this.val - o.val;
+        }
+    
+      }
 }
