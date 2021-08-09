@@ -39,4 +39,24 @@ public class day36 {
         }
         return sb.toString();
     }
+
+    public String addStrings(String num1, String num2) {
+        int n = num1.length() , m = num2.length() , i = n-1 , j = m-1;
+        int carry = 0; 
+        StringBuilder sb = new StringBuilder();
+        
+        while(i >= 0 || j >= 0 || carry > 0){
+            int v1 = (i >= 0) ? (num1.charAt(i) - '0') : 0;
+            int v2 = (j >= 0) ? (num2.charAt(j) - '0') : 0;
+            
+            int temp = v1 + v2 + carry;
+            carry = temp / 10;
+            temp %= 10;
+            
+            sb.insert(0 , temp);
+            i--;
+            j--;
+        }
+        return sb.toString();
+    }
 }
