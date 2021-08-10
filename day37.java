@@ -38,4 +38,25 @@ public class day37 {
         helper(node.left);
         helper(node.right);
     }
+
+    public TreeNode sortedListToBST(ListNode head) {
+        if(head == null) return null;
+        
+        ListNode slow = head , fast = head , preslow = null;
+        while(fast != null && fast.next != null){
+            preslow = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        
+        if(preslow != null) preslow.next = null;
+        if(slow == null) return null;
+        
+        TreeNode root = new TreeNode(slow.val);
+        
+        if(head != slow) root.left = sortedListToBST(head);
+        root.right = sortedListToBST(slow.next);
+        
+        return root;
+    }
 }
