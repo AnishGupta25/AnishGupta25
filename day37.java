@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.PriorityQueue;
 
 public class day37 {
     public int minimumEffort(int[][] tasks) {
@@ -58,5 +59,38 @@ public class day37 {
         root.right = sortedListToBST(slow.next);
         
         return root;
+    }
+
+    public MedianFinder() {
+        PriorityQueue<Integer> left = new PriorityQueue<>(Collections.reverseOrder());
+        PriorityQueue<Integer> right = new PriorityQueue<>();
+    }
+    
+    public void addNum(int num) {
+        if(right.size() > 0 && num > right.peek()){
+            right.add(num);
+        }
+        else {
+            left.add(num);
+        }
+        int gap = left.size() - right.size();
+        if(gap > 1){
+            right.add(left.remove());
+        }
+        else if(gap < -1){
+            left.add(right.remove());
+        }
+    }
+    
+    public double findMedian() {
+        if(left.size() > right.size()){
+            return left.peek() * 1.0;
+        }
+        else if(right.size() > left.size()){
+            return right.peek() * 1.0;
+        }
+        else{
+            return (left.peek()*1.0 + right.peek()*1.0)/2;
+        }
     }
 }
