@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class day38 {
     public void flatten(TreeNode root) {
         if(root == null || (root.right == null && root.left == null)) return;
@@ -46,5 +48,27 @@ public class day38 {
     public boolean overlap(int a1 , int a2 ,int b1 , int b2){
         if(a2 <= b1 || b2 <= a1) return false;
         return true;
+    }
+
+    public String[] findOcurrences(String text, String first, String second) {
+        String[] str = text.split(" ");
+        int n = str.length;
+        ArrayList<String> res = new ArrayList<>();
+        int i = 0, j = 1, k = 2;
+        
+        while(k < n){
+            if(str[i].equals(first) && str[j].equals(second)){
+                res.add(str[k]);
+            }
+            i++;
+            j++;
+            k++;
+        }
+        
+        String[] ans = new String[res.size()];
+        for(int l = 0; l < res.size(); l++){
+            ans[l] = res.get(l);
+        }
+        return ans;
     }
 }
