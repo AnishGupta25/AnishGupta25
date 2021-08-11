@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class day38 {
     public void flatten(TreeNode root) {
@@ -70,5 +71,18 @@ public class day38 {
             ans[l] = res.get(l);
         }
         return ans;
+    }
+
+    public int majorityElement(int[] nums) {
+        HashMap<Integer , Integer> elem = new HashMap<>();
+        
+        for(int i : nums){
+            elem.put(i , elem.getOrDefault(i,0)+1);
+        }
+        
+        for(int key : elem.keySet()){
+            if(elem.get(key) > nums.length / 2) return key;
+        }
+        return 0;
     }
 }
