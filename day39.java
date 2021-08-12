@@ -121,4 +121,44 @@ public class day39 {
         }
         return false;
     }
+
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        if(head == null || head.next == null || left == right) return head;
+        
+        ListNode fast = head;
+        ListNode slow = head;
+        ListNode prefix = null;
+        while(right-- > 1){
+            fast = fast.next;
+        }
+        ListNode tail = fast.next;
+        
+        while(left-- > 1){
+            prefix = slow;
+            slow = slow.next;
+        }
+        
+        reverse(slow , fast);
+        if(prefix == null){
+            head = fast;
+            slow.next = tail;
+        }
+        else{
+            prefix.next = fast;
+            slow.next = tail;
+        }
+        return head;
+    }
+    
+    public void reverse(ListNode slow , ListNode fast){
+        ListNode prev = null;
+        ListNode curr = slow;
+        while(curr != fast){
+            ListNode fwd = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = fwd;
+        }
+        curr.next = prev;
+    }
 }
