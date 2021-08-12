@@ -73,4 +73,38 @@ public class day39 {
         
         return res.next;
     }
+
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head == null || head.next == null || k == 0) return head;
+        
+        int size = size(head);
+        if(k % size == 0) return head;
+        k = size - (k % size);
+        ListNode temp = head;
+        while(k - 1 > 0){
+            temp = temp.next;
+            k--;
+        }
+        ListNode start = temp.next;
+        temp.next = null;
+        
+        ListNode last = start;
+        while(last.next != null){
+            last = last.next;
+        }
+        
+        last.next = head;
+        head = start;
+        
+        return head;
+    }
+    
+    public int size(ListNode head){
+        int size = 0;
+        while(head != null){
+            size++;
+            head = head.next;
+        }
+        return size;
+    }
 }
