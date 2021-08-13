@@ -1,3 +1,4 @@
+import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.PriorityQueue;
 
@@ -92,5 +93,32 @@ public class day37 {
         else{
             return (left.peek()*1.0 + right.peek()*1.0)/2;
         }
+    }
+
+    public Node connect(Node root) {
+        if(root == null) return root;
+        
+        Queue<Node> que = new ArrayDeque<>();
+        que.add(root);
+        Queue<Node> Helperque = new ArrayDeque<>();
+        
+        while(que.size() > 0){
+            Node temp = que.remove();
+            if(temp.left != null) Helperque.add(temp.left);
+            if(temp.right != null) Helperque.add(temp.right);
+            while(que.size() > 0){
+                Node curr = que.remove();
+                if(curr.left != null) Helperque.add(curr.left);
+                if(curr.right != null) Helperque.add(curr.right);
+                temp.next = curr;
+                temp = curr;
+            }
+            if(que.size() == 0){
+                que = Helperque;
+                Helperque = new ArrayDeque<>();
+            }
+            
+        }
+        return root;
     }
 }
