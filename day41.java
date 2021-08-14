@@ -21,4 +21,61 @@ public class day41 {
             if(col == 0) matrix[i][0] = 0;
         }
     }
+
+    public ListNode reverseKGroup(ListNode head, int k) {
+        if(head == null || head.next == null || k <= 1) return head;
+        
+        int size = size(head);
+        if(size < k) return head;
+        
+        ListNode OrigHead = null;
+        ListNode OrigTail = null;
+        ListNode curr = head;
+        
+        while(size >= k){
+            int tempk = k;
+            while(tempk-- > 0){
+                ListNode fwd = curr.next;
+                curr.next = null;
+                addFirst(curr);
+                curr = fwd;
+            }
+            if(OrigHead == null){
+                OrigHead = tempHead;
+                OrigTail = tempTail;
+            }
+            else{
+                OrigTail.next = tempHead;
+                OrigTail = tempTail;
+            }
+            size -= k;
+            tempHead = null;
+            tempTail = null;
+        }
+        OrigTail.next = curr;
+        return OrigHead;
+    }
+    ListNode tempHead = null;
+    ListNode tempTail = null;
+    public void addFirst( ListNode node){
+        if(tempHead == null){
+            tempHead = node;
+            tempTail = node;
+        }
+        else{
+            node.next = tempHead;
+            tempHead = node;
+        }
+    }
+    
+    public int size(ListNode head){
+        ListNode temp = head;
+        int size = 0;
+        
+        while(temp != null){
+            size++;
+            temp = temp.next;
+        }
+        return size;
+    }
 }
