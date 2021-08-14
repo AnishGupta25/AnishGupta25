@@ -127,4 +127,22 @@ public class day41 {
             }
         }
     }
+
+    public static ArrayList<Integer> duplicates(int arr[], int n) {
+        ArrayList<Integer> res = new ArrayList<>();
+        int a[] = new int[n];
+        for(int j = 0; j < n; j++){
+            a[arr[j]] = a[arr[j]] + 1;
+        }
+        for(int i = 0; i < n; i++){
+            if(a[i] > 1){
+                res.add(i);
+            }
+        }
+        if(res.isEmpty()){
+            res.add(-1);
+        }
+        
+        return res;
+    }
 }
