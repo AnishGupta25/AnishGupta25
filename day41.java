@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+
 public class day41 {
     public void setZeroes(int[][] matrix) {
         int col = 1;
@@ -89,5 +92,39 @@ public class day41 {
         }
         
         return 0;
+    }
+
+    public static class Pair implements Comparable<Pair> {
+        int curVtx, wt;
+        String path;
+        Pair(int curVtx, int wt, String path) {
+          this.curVtx = curVtx;
+          this.wt = wt;
+          this.path = path;
+        }
+        public int compareTo(Pair o) {
+          return this.wt - o.wt;
+        }
+    }
+    
+    public static void ShortPath(ArrayList<Edge>[] graph , int src) {
+        boolean[] visited = new boolean[graph.length];
+        PriorityQueue<Pair> pq = new PriorityQueue<>();
+        pq.add(new Pair(src , 0 , src+""));
+        
+        while(pq.size() > 0){
+            Pair temp = pq.remove();
+            
+            if(!visited[temp.curVtx]){
+                visited[temp.curVtx] = true;
+                System.out.println(temp.curVtx + " via " + temp.path + " @ " + temp.wt);
+                
+                for(Edge e : graph[temp.curVtx]){
+                    if(!visited[e.nbr]){
+                        pq.add(new Pair(e.nbr , temp.wt + e.wt , temp.path + e.nbr));
+                    }
+                }
+            }
+        }
     }
 }
