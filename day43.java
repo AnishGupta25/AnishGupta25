@@ -70,4 +70,20 @@ public class day43 {
         }
         return res;
     }
+
+    public int countPrimes(int n) {
+        if(n <= 2) return 0;
+        
+        boolean[] primes = new boolean[n];
+        int count = 1;
+        for(int i = 3; i < n; i+=2){
+            if(!primes[i]){
+                count++;
+                for(int j = 1; j*i < n; j++){
+                    primes[j*i] = true;
+                }
+            }
+        }
+        return count;
+    }
 }
