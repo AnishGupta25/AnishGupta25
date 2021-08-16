@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public class day43 {
     Node reverseList(Node head){
         if(head == null || head.next == null) return head;
@@ -31,5 +33,15 @@ public class day43 {
             fast = slow.next;
         }
         return head;
+    }
+
+    public boolean containsDuplicate(int[] nums) {
+        HashMap<Integer , Integer> hm = new HashMap<>();
+        
+        for(int i = 0; i < nums.length; i++){
+            if(hm.containsKey(nums[i])) return true;
+            else hm.put(nums[i] , 1);
+        }
+        return false;
     }
 }
