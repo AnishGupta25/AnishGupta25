@@ -1,4 +1,5 @@
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.PriorityQueue;
 
 public class day44 {
@@ -15,4 +16,17 @@ public class day44 {
         }
         return pq.peek();
     } 
+
+    public static int doUnion(int a[], int n, int b[], int m) {
+        HashMap<Integer , Integer> elem = new HashMap<>();
+        
+        for(int i : a){
+            elem.put(i , elem.getOrDefault(i,0)+1);
+        }
+        for(int i : b){
+            elem.put(i , elem.getOrDefault(i,0)+1);
+        }
+        
+        return elem.size();
+    }
 }
