@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.PriorityQueue;
@@ -43,5 +44,25 @@ public class day44 {
             if(max < 0) max = 0;
         }
         return MaxSum;
+    }
+
+    public void merge(int arr1[], int arr2[], int n, int m) {
+        int i = 0 , j = 0 , k = arr1.length - 1;
+        
+        while(i < arr1.length && j < arr2.length){
+            int val1 = arr1[i];
+            int val2 = arr2[j];
+            if(val1 <= val2){
+                i++;
+            }
+            else{
+                arr2[j] = arr1[k];
+                arr1[k] = val2;
+                k--;
+                j++;
+            }
+        }
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
     }
 }
