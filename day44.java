@@ -29,4 +29,19 @@ public class day44 {
         
         return elem.size();
     }
+
+    int maxSubarraySum(int arr[], int n){
+        
+        int MaxSum = Integer.MIN_VALUE;
+        int max = 0;
+        
+        for(int i = 0; i < n; i++){
+            max += arr[i];
+            if(max > MaxSum){
+                MaxSum = max;
+            }
+            if(max < 0) max = 0;
+        }
+        return MaxSum;
+    }
 }
