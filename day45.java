@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class day45 {
     public int largestAltitude(int[] gain) {
         if(gain.length == 0) return 0;
@@ -46,5 +48,23 @@ public class day45 {
             curr = fwd;
         }
         return prev;
+    }
+
+    public static void getPath(int[][] m , int n , String psf , int row , int col , boolean[][] visited , ArrayList<String> list){
+        if(row < 0 || col < 0 || row == n || col == n || m[row][col] == 0 || visited[row][col] == true) return;
+        
+        if(row == n-1 && col == n-1){
+            list.add(psf);
+            // System.out.println(psf + " ");
+            return;
+        }
+        visited[row][col] = true;
+        
+        getPath(m , n , psf+"D" , row + 1 , col , visited , list);
+        getPath(m , n , psf+"L" , row , col - 1 , visited , list);
+        getPath(m , n , psf+"R" , row , col + 1 , visited , list);
+        getPath(m , n , psf+"U" , row - 1 , col , visited , list);
+        
+        visited[row][col] = false;
     }
 }
