@@ -74,10 +74,21 @@ public class day45 {
         ListNode temp1 = head1;
         ListNode temp2 = head2;
          
-         while(temp1 != temp2){
-             temp1 = temp1 == null ? head2 : temp1.next;
-             temp2 = temp2 == null ? head1 : temp2.next;
-         }
-         return temp1.val;
-     }
+        while(temp1 != temp2){
+            temp1 = temp1 == null ? head2 : temp1.next;
+            temp2 = temp2 == null ? head1 : temp2.next;
+        }
+        return temp1.val;
+    }
+
+    int getMiddle(ListNode head){
+        ListNode fast = head;
+        ListNode slow = head;
+        
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow.val;
+    }
 }
