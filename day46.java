@@ -40,4 +40,16 @@ public class day46 {
         
         return new String(str);
     }
+
+    public int maxAscendingSum(int[] nums) {
+        int MaxSum = nums[0];
+        int max = nums[0];
+        
+        for(int i = 1; i < nums.length; i++){
+            if(nums[i] > nums[i - 1]) max += nums[i];
+            else max = nums[i];
+            if(max > MaxSum) MaxSum = max;
+        }
+        return MaxSum;
+    }
 }
