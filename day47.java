@@ -58,4 +58,25 @@ public class day47 {
           }
         }
     }
+
+    public static void combinations(int[] boxes, int ci, int ti, int lb) {
+        if (ci > ti) {
+          for (int i = 0; i < boxes.length; i++) {
+            if (boxes[i] != 0)
+              System.out.print("i");
+            else System.out.print("-");
+          }
+          System.out.println();
+          return;
+        }
+    
+        for (int i = 0; i < boxes.length; i++) {
+          if (boxes[i] == 0 && i > lb) {
+            boxes[i] = ci;
+            lb = i;
+            combinations(boxes, ci + 1, ti, lb);
+            boxes[i] = 0;
+          }
+        }
+    }
 }
