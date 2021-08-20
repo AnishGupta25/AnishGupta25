@@ -108,4 +108,59 @@ public class day47 {
     
         permutations(cb + 1, tb, items, ssf + 0, ts, asf + 0);
     }
+
+    public static void queensPermutations(int qpsf, int tq, int row, int col, String asf, boolean[] queens) {
+        if (row == tq) {
+          if (qpsf == tq) {
+            System.out.println(asf);
+            System.out.println();
+          }
+          return;
+        }
+    
+        int nr, nc;
+        String sep = "";
+        if (col < tq - 1) {
+          nr = row;
+          nc = col + 1;
+          sep = "\t";
+        }
+        else {
+          nr = row + 1;
+          nc = 0;
+          sep = "\n";
+        }
+        for (int i = 0; i < tq; i++) {
+          if (!queens[i]) {
+            queens[i] = true;
+            queensPermutations(qpsf + 1, tq, nr, nc, asf + "q" + (i + 1) + sep, queens);
+            queens[i] = false;
+          }
+        }
+        queensPermutations(qpsf, tq, nr, nc, asf + "-" + sep, queens);
+    }
+
+    public static void queensCombinations(int qpsf, int tq, int row, int col, String asf) {
+      if(row == tq){
+          if(qpsf == tq){
+              System.out.println(asf);
+          }
+          return;
+      }
+      
+      int nr , nc;
+      String sep = "";
+      if(col < tq - 1){
+          nc = col+1;
+          nr = row;
+          sep = "";
+      }
+      else{
+          nc = 0;
+          nr = row+1;
+          sep = "\n";
+      }
+      queensCombinations(qpsf+1 , tq , nr , nc , asf+"q"+sep);
+      queensCombinations(qpsf , tq , nr , nc , asf+"-"+sep);
+    }
 }
