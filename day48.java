@@ -66,4 +66,61 @@ public class day48 {
             }
         }
     }
+
+    public static boolean IsQueenSafe(int[][] chess, int row, int col) {
+        for(int i = row, j = col; i >= 0; i--){
+            if(chess[i][j] != 0) return false;
+        }
+        
+        for(int i = row, j = col; i < chess.length; i++){
+            if(chess[i][j] != 0) return false;
+        }
+        
+        for(int i = row , j = col; j >= 0; j--){
+            if(chess[i][j] != 0) return false;
+        }
+        
+        for(int i = row , j = col; j < chess.length; j++){
+            if(chess[i][j] != 0) return false;
+        }
+        
+        for(int i = row , j = col; j >= 0 && i >= 0; j-- , i--){
+            if(chess[i][j] != 0) return false;
+        }
+        
+        for(int i = row, j = col; j < chess.length && i < chess.length; j++ , i++){
+            if(chess[i][j] != 0) return false;
+        }
+        
+        for(int i = row , j = col; j < chess.length && i >= 0; j++ , i--){
+            if(chess[i][j] != 0) return false;
+        }
+        
+        for(int i = row , j = col; j >= 0 && i < chess.length; j-- , i++){
+            if(chess[i][j] != 0) return false;
+        }
+        return true;
+      }
+    
+      public static void nqueens(int qpsf, int tq, int[][] chess) {
+        if(qpsf == tq){
+            for(int i = 0; i < chess.length; i++){
+                for(int j = 0; j < chess.length; j++){
+                    System.out.print(chess[i][j] != 0 ? "q" +chess[i][j]+"\t" : "-\t");
+                }
+                System.out.println();
+            }
+            System.out.println();
+        }
+        
+        for(int i = 0; i < tq*tq; i++){
+            int row = i / tq; 
+            int col = i % tq;
+            if(chess[row][col] == 0 && IsQueenSafe(chess , row , col)){
+                chess[row][col] = qpsf + 1;
+                nqueens(qpsf + 1 , tq , chess);
+                chess[row][col] = 0;
+            }
+        }
+      }
 }
