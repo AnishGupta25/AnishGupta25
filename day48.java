@@ -36,4 +36,34 @@ public class day48 {
         }
         return prev;
     }
+
+    public static void queensCombinations(int qpsf, int tq, boolean[][] chess, int lcno) {
+        if(qpsf == tq){
+            for(int i = 0; i < chess[0].length*chess.length; i++){
+                int row = i / chess[0].length;
+                int col = i % chess[0].length;
+                if(!chess[row][col]){
+                    System.out.print("-" + "\t");
+                }
+                if(chess[row][col]){
+                    System.out.print("q" + "\t");
+                }
+                if(col == chess[0].length - 1){
+                    System.out.println();
+                }
+            }
+            System.out.println();
+            return;
+        }
+        
+        for(int i = lcno+1; i < chess[0].length*chess.length; i++){
+            int row = i / chess[0].length;
+            int col = i % chess[0].length;
+            if(!chess[row][col]){
+                chess[row][col] = true;
+                queensCombinations(qpsf+1 , tq , chess , i);
+                chess[row][col] = false;
+            }
+        }
+    }
 }
