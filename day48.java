@@ -21,4 +21,19 @@ public class day48 {
         }
         return sb.toString();
     }
+
+    public ListNode reverseList(ListNode head) {
+        if(head == null || head.next == null) return head;
+        
+        ListNode prev = null;
+        ListNode curr = head;
+        
+        while(curr != null){
+            ListNode fwd = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = fwd;
+        }
+        return prev;
+    }
 }
