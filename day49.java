@@ -13,4 +13,12 @@ public class day49 {
         }
         return null;
     }
+
+    public static boolean IsKnightSafe(boolean[][] chess, int i, int j) {
+        if(i-1 >= 0 && j-2 >= 0 && chess[i-1][j-2]) return false;
+        if(i-1 >= 0 && j+2 < chess.length && chess[i-1][j+2]) return false;
+        if(i-2 >= 0 && j+1 < chess.length && chess[i-2][j+1]) return false;
+        if(i-2 >= 0 && j-1 >= 0 && chess[i-2][j-1]) return false;
+        return true;
+    }
 }
