@@ -21,4 +21,26 @@ public class day49 {
         if(i-2 >= 0 && j-1 >= 0 && chess[i-2][j-1]) return false;
         return true;
     }
+
+    public static void queensPermutations(int qpsf, int tq, int[][] chess) {
+        if (qpsf == tq) {
+          for (int row = 0; row < chess.length; row++) {
+            for (int col = 0; col < chess.length; col++) {
+              System.out.print(chess[row][col] != 0 ? "q"+chess[row][col]+"\t" : "-\t");
+            }
+            System.out.println();
+          }
+          System.out.println();
+          return;
+        }
+        
+        for(int i = 0; i < tq*tq; i++){
+            int row = i / tq, col = i % tq;
+            if(chess[row][col] == 0){
+                chess[row][col] = qpsf + 1;
+                queensPermutations(qpsf+1 , tq , chess);
+                chess[row][col] = 0;
+            }
+        }
+    }
 }
