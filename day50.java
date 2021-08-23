@@ -76,4 +76,22 @@ public class day50 {
         }
         return false;
     }
+
+    public boolean isPathCrossing(String path) {
+        HashSet<String> set = new HashSet<>();
+        set.add("(00)");
+        
+        int x = 0, y = 0;
+        
+        for(char ch : path.toCharArray()){
+            if(ch == 'N') y++;;
+            if(ch == 'S') y--;
+            if(ch == 'E') x++;
+            if(ch == 'W') x--;
+            
+            if(set.contains("("+x+y+")")) return true;
+            else set.add("("+x+y+")");
+        }
+        return false;
+    }
 }
