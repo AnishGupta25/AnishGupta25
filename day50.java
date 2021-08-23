@@ -28,4 +28,31 @@ public class day50 {
         helper(root.left , current * 10 + root.val , ans);
         helper(root.right , current * 10 + root.val , ans);
     }
+
+    public boolean findTarget(TreeNode root, int k) {
+        if(root == null) return false;
+        ArrayList<TreeNode> list = new ArrayList<>();
+        inOrder(root , list);
+        
+        int i = 0, j = list.size() - 1;
+        
+        while(i < j){
+            if(list.get(i).val + list.get(j).val < k){
+                i++;
+            }
+            else if(list.get(i).val + list.get(j).val > k){
+                j--;
+            }
+            else return true;
+        }
+        return false;
+    }
+    
+    public void inOrder(TreeNode root, ArrayList<TreeNode> list){
+        if(root == null) return;
+        
+        inOrder(root.left , list);
+        list.add(root);
+        inOrder(root.right , list);
+    }
 }
