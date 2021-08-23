@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.HashSet;
 public class day50 {
     public class TreeNode {
             int val;
@@ -8,7 +10,7 @@ public class day50 {
             TreeNode(int val, TreeNode left, TreeNode right) {
                 this.val = val;
                 this.left = left;
-                 this.right = right;
+                this.right = right;
             }
         }
     public int sumNumbers(TreeNode root) {
@@ -54,5 +56,24 @@ public class day50 {
         inOrder(root.left , list);
         list.add(root);
         inOrder(root.right , list);
+    }
+
+    public boolean isHappy(int n) {
+        HashSet<Integer> set = new HashSet<>();
+        set.add(n);
+        
+        while(true){
+            int val = 0;
+            while(n > 0){
+                int temp = n % 10;
+                val += temp*temp;
+                n /= 10;
+            }
+            if(val == 1) return true;
+            else if(!set.contains(val)) set.add(val);
+            else if(set.contains(val)) break;
+            n = val;
+        }
+        return false;
     }
 }
