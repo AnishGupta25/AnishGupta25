@@ -1,3 +1,5 @@
+import java.util.HashSet;
+import java.util.ArrayList;
 public class day51 {
 
     class Node{
@@ -52,5 +54,19 @@ public class day51 {
             }
         }
         
+    }
+
+    public ArrayList<Integer> findDisappearedNumbers(int[] nums) {
+        HashSet<Integer> set = new HashSet<>();
+        for(int i = 0; i < nums.length; i++){
+            if(!set.contains(nums[i])) set.add(nums[i]);
+        }
+        
+        ArrayList<Integer> ans = new ArrayList<>();
+        
+        for(int i = 1; i <= nums.length; i++){
+            if(!set.contains(i)) ans.add(i);
+        }
+        return ans;
     }
 }
