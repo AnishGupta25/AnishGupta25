@@ -69,4 +69,28 @@ public class day52 {
         }
         return maxSum;
     }
+
+    public int twoEggDrop(int n) {
+        if(n == 1 || n == 2 || n == 0) return n;
+        
+        int[][] dp = new int[3][n+1];
+        
+        for(int i = 1; i < 3; i++){
+            for(int j = 1; j <= n; j++){
+                if(i == 1) dp[i][j] = j;
+                else if(j == 1) dp[i][j] = 1;
+                else{
+                    int min  = Integer.MAX_VALUE;
+                    for(int s = j-1, b = 0; s >= 0; s--,b++){
+                        int survive = dp[i][s];
+                        int breaks = dp[i-1][b];
+                        int max = Math.max(survive , breaks);
+                        min = Math.min(min , max);
+                    }
+                    dp[i][j] = min + 1;
+                }
+            }
+        }
+        return dp[2][n];
+    }
 }
