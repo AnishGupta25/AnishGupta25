@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Stack;
 public class day52 {
     public boolean judgeSquareSum(int c) {
@@ -30,5 +31,15 @@ public class day52 {
             st.push(i);
         }
         return arr;
+    }
+
+    public int arrayPairSum(int[] nums) {
+        Arrays.sort(nums);
+        int ans = 0;
+        for(int i = 0; i < nums.length; i++){
+            ans += nums[i];
+            i++;
+        }
+        return ans;
     }
 }
