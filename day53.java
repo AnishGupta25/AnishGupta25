@@ -1,5 +1,6 @@
+import java.util.*;
 public class day53 {
-    public boolean wordBreak(String s, List<String> wordDict) {
+    public boolean wordBreak(String s, ArrayList<String> wordDict) {
         int dp[] = new int[s.length()];
         
         for(int i = 0; i < s.length(); i++){
@@ -16,5 +17,22 @@ public class day53 {
             }
         }
         return dp[s.length()-1] > 0;
+    }
+
+    public String removeDuplicates(String s) {
+        Stack<Character> st = new Stack<>();
+        
+        for(int i = s.length() - 1; i >= 0; i--){
+            char ch = s.charAt(i);
+            if(st.size() == 0) st.push(ch);
+            else if(st.size() != 0 && st.peek() == ch) st.pop();
+            else st.push(ch);
+        }
+        StringBuilder sb = new StringBuilder();
+        while(!st.isEmpty()) {
+            sb.append(st.pop());
+        }
+        
+        return sb.toString();
     }
 }
