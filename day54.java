@@ -78,4 +78,20 @@ public class day54 {
         }
         return barcodes;
     }
+
+    class Node{
+        int data ;
+        Node next;
+        Node(int d){
+            data = d;
+            next = null;
+        }
+    }
+
+    void deleteNode(Node del){
+        int val = del.next.data;
+        del.data = val;
+        
+        del.next = del.next.next;
+    }
 }
