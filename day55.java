@@ -38,4 +38,17 @@ public class day55 {
         }
         return dp[n][W];
     } 
+
+    public static void combination(int i, String ustr, int ssf, int ts, String asf ) {
+        if (i == ustr.length()) {
+          if (ssf == ts) {
+            System.out.println(asf);
+          }
+          return;
+        }
+    
+        char ch = ustr.charAt(i);
+        combination(i+1, ustr, ssf+1, ts, asf + ch);
+        combination(i+1, ustr, ssf, ts, asf);
+    }
 }
