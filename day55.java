@@ -51,4 +51,16 @@ public class day55 {
         combination(i+1, ustr, ssf+1, ts, asf + ch);
         combination(i+1, ustr, ssf, ts, asf);
     }
+
+    public static void combination2(int i, String ustr, int ssf, int ts, String asf){
+        if(ssf == ts){
+            System.out.println(asf);
+            return;
+        }
+        
+        for(int j = i+1; j < ustr.length(); j++){
+            char ch = ustr.charAt(j);
+            combination2(j, ustr, ssf+1, ts, asf+ch);
+        }
+    }
 }
