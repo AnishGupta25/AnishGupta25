@@ -17,5 +17,20 @@ public class day56 {
             fmap.put(ch, fmap.get(ch) + 1);
           }
         }
-      }
+    }
+
+    public boolean checkIfPangram(String sentence) {
+        if(sentence.length() == 0) return false;
+        
+        int arr[] = new int[26];
+        
+        for(int i = 0; i < sentence.length(); i++){
+            char ch = sentence.charAt(i);
+            arr[ch - 'a']++;
+        }
+        for(int i : arr){
+            if(i == 0) return false;
+        }
+        return true;
+    }
 }
