@@ -62,4 +62,32 @@ public class day56 {
       }
     }
    }
+
+   public static void printNQueens(boolean[][] board, String asf, int row , int[] bcol , int[] rd , int[] ld) {
+    if (row == board.length) {
+      System.out.println(asf + ".");
+      return;
+    }
+
+    for (int col = 0; col < board.length; col++) {
+      if (isSafe(board, col, row , bcol , rd , ld)) {
+        board[row][col] = true;
+        bcol[col] = 1;
+        rd[col+row] = 1;
+        ld[col-row + board.length - 1] = 1;
+        printNQueens(board, asf + row + "-" + col + ", ", row + 1 , bcol , rd , ld);
+        bcol[col] = 0;
+        rd[col+row] = 0;
+        ld[col-row + board.length - 1] = 0;
+        board[row][col] = false;
+      }
+    }
+  }
+  
+  public static boolean isSafe(boolean[][] board, int col, int row , int[] bcol , int[] rd , int[] ld){
+    if(bcol[col] != 0) return false;
+    if(rd[col+row] != 0) return false;
+    if(ld[col-row + board.length - 1] != 0) return false;
+    return true;
+  }
 }
