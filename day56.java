@@ -33,4 +33,33 @@ public class day56 {
         }
         return true;
     }
+
+    public static int counter = 1;
+    public static void solution(int i, int n, int k, int rssf, ArrayList<ArrayList<Integer>> ans) {
+    if (i > n) {
+      if (rssf == k) {
+        System.out.print(counter + ". ");
+        counter++;
+        for (ArrayList<Integer> arr : ans) {
+          System.out.print(arr + " ");
+        }
+        System.out.println();
+      }
+      return;
+    }
+
+    for (int j = 0; j < ans.size(); j++) {
+      if (ans.get(j).size() == 0) {
+        ans.get(j).add(i);
+        solution(i + 1, n, k, rssf + 1, ans);
+        ans.get(j).remove(ans.get(j).size() - 1);   
+        break;
+      }
+      else {
+        ans.get(j).add(i);
+        solution(i + 1, n, k, rssf, ans);
+        ans.get(j).remove(ans.get(j).size() - 1);
+      }
+    }
+   }
 }
