@@ -39,4 +39,29 @@ public class day57 {
         
         return res;
     }
+
+    class Node{
+        int data;
+        Node next;
+        
+        Node(int d){
+            data = d;
+            next = null;
+        }
+    }
+
+    boolean isPalindrome(Node head) {
+        left = head;
+        return isPalindromehelper(head);
+    }
+    Node left;
+    
+    boolean isPalindromehelper(Node right){
+        if(right == null) return true;
+        
+        boolean ress = isPalindromehelper(right.next);
+        if(!ress) return false;
+        else if(left.data != right.data) return false;
+        else left = left.next; return true;
+    }
 }
