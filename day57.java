@@ -64,4 +64,61 @@ public class day57 {
         else if(left.data != right.data) return false;
         else left = left.next; return true;
     }
+
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode() {}
+        TreeNode(int val) { this.val = val; }
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    public ArrayList<TreeNode> delNodes(TreeNode root, int[] to_delete) {
+        if(root == null) return new ArrayList<>();
+        
+        ArrayList<TreeNode> forest = new ArrayList<>();
+        HashSet<Integer> delete = new HashSet<>();
+        for(int i : to_delete){
+            delete.add(i);
+        }
+        
+        if(!delete.contains(root.val)){
+            forest.add(root);
+        }
+        delNodeshelper(root , null , forest , delete);
+        return forest;
+    }
+    
+    public void delNodeshelper(TreeNode root , TreeNode parent , ArrayList<TreeNode> forest , HashSet<Integer> delete){
+        if(root == null) return;
+        
+        delNodeshelper(root.left , root , forest , delete);
+        delNodeshelper(root.right , root , forest , delete);
+        
+        if(delete.contains(root.val)){
+            unlink(root , parent);
+            if(root.left != null){
+                forest.add(root.left);
+            }
+            if(root.right != null){
+                forest.add(root.right);
+            }
+        }
+    }
+    
+    public void unlink(TreeNode root , TreeNode parent){
+        if(parent == null || root == null) return;
+        
+        if(parent.left == root){
+            parent.left = null;
+        }
+        else{
+            parent.right = null;
+        }
+    }
 }
