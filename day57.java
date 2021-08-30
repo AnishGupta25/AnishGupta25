@@ -26,4 +26,17 @@ public class day57 {
         
         return str.reverse().toString();
     }
+
+    public int[] numMovesStones(int a, int b, int c) {
+        int max = Math.max(a,Math.max(b,c)) , min = Math.min(a,Math.min(b,c)) , mid = a+b+c-max-min;
+        
+        int res[] = new int[2];
+        res[1] = max - min - 2; 
+        
+        if(max - mid == 1 && mid - min == 1) res[0] = 0;
+        else if(max - mid <= 2 || mid - min <= 2) res[0] = 1;
+        else res[0] = 2;
+        
+        return res;
+    }
 }
