@@ -24,4 +24,15 @@ public class day59 {
         }
         return true;
     }
+
+    static int majorityElement(int a[], int size){
+        HashMap<Integer , Integer> map = new HashMap<>();
+        for(int i : a){
+            map.put(i , map.getOrDefault(i , 0)+1);
+        }
+        for(int i : map.keySet()){
+            if(map.get(i) > size / 2) return i;
+        }
+        return -1;
+    }
 }
