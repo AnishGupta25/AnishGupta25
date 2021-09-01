@@ -54,4 +54,43 @@ public class day59 {
       }
       return subLen;
   }
+
+  public static void solution(int[] arr, int vidx, int n, int k, int[] subsetSum, int ssssf, ArrayList<ArrayList<Integer>> ans) {
+    if (vidx == n) {
+      if (ssssf == k) {
+        boolean flag = true;
+        for (int i = 0; i < k - 1; i++) {
+          if (subsetSum[i] != subsetSum[i + 1]){
+            flag = false;
+            break;
+          } 
+        }
+        if (flag) {
+          for (ArrayList<Integer> list : ans) {
+            System.out.print(list + " ");
+          }
+          System.out.println();
+        }
+      }
+      return;
+    }
+
+    for (int i = 0; i < k; i++) {
+      if (ans.get(i).size() == 0) {
+        ans.get(i).add(arr[vidx]);
+        subsetSum[i] += arr[vidx];
+        solution(arr, vidx + 1, n, k, subsetSum, ssssf + 1, ans);
+        subsetSum[i] -= arr[vidx];
+        ans.get(i).remove(ans.get(i).size() - 1);
+        break;
+      }
+      else {
+        ans.get(i).add(arr[vidx]);
+        subsetSum[i] += arr[vidx];
+        solution(arr, vidx + 1, n, k, subsetSum, ssssf, ans);
+        subsetSum[i] -= arr[vidx];
+        ans.get(i).remove(ans.get(i).size() - 1);
+      }
+    }
+  }
 }
