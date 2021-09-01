@@ -93,4 +93,26 @@ public class day59 {
       }
     }
   }
+
+  public static void generateWords(int cc, String str, Character[] spots, HashMap<Character, Integer> lastOccurence) {
+    if (cc == str.length()) {
+      for (int i = 0; i < spots.length; i++) {
+        System.out.print(spots[i]);
+      }
+      System.out.println();
+      return;
+    }
+
+    char ch = str.charAt(cc);
+    int freq = lastOccurence.get(ch);
+    for (int i = freq + 1; i < str.length(); i++) {
+      if (spots[i] ==  null) {
+        spots[i] = ch;
+        lastOccurence.put(ch, i);
+        generateWords(cc + 1, str, spots, lastOccurence);
+        spots[i] = null;
+        lastOccurence.put(ch, freq);
+      }
+    }
+  }
 }
