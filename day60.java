@@ -36,4 +36,19 @@ public class day60 {
       }
       coinChange2(i+1 , coins , amtsf , tamt , asf);
     }
+
+    public static void coinChange3(int[] coins, int amtsf, int tamt, String asf, boolean[] used) {
+      if(amtsf == tamt){
+          System.out.println(asf+".");
+          return;
+      }
+      
+      for(int i = 0; i < coins.length; i++){
+          if(!used[i]){
+              used[i] = true;
+              coinChange3(coins , amtsf + coins[i], tamt , asf+coins[i]+"-" , used);
+              used[i] = false;
+          }
+      }
+    }
 }
