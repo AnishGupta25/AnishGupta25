@@ -8,14 +8,32 @@ public class day60 {
         return count;
     }
 
-    public static void coinChange(int i, int[] coins, int amtsf, int tamt, String asf) {
+    public static void coinChange1(int i, int[] coins, int amtsf, int tamt, String asf) {
         if (i == coins.length) {
           if (amtsf == tamt) {
             System.out.println(asf + ".");
           }
           return;
         }
-        coinChange(i + 1, coins, amtsf + coins[i], tamt, asf + coins[i] + "-");
-        coinChange(i + 1, coins, amtsf, tamt, asf + "");
+        coinChange1(i + 1, coins, amtsf + coins[i], tamt, asf + coins[i] + "-");
+        coinChange1(i + 1, coins, amtsf, tamt, asf + "");
+    }
+
+    public static void coinChange2(int i, int[] coins, int amtsf, int tamt, String asf) {
+      if(i == coins.length){
+          if(amtsf == tamt){
+              System.out.println(asf+".");
+          }
+          return;
+      }
+      
+      for(int k = tamt / coins[i]; k > 0; k--){
+          String psf = "";
+          for(int j = 0; j < k; j++){
+              psf += coins[i]+"-";
+          }
+          coinChange2(i+1 , coins , amtsf+coins[i]*k , tamt , asf+psf);
+      }
+      coinChange2(i+1 , coins , amtsf , tamt , asf);
     }
 }
