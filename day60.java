@@ -51,4 +51,16 @@ public class day60 {
           }
       }
     }
+
+    public static void coinChange4(int[] coins, int amtsf, int tamt, String asf) {
+      if (amtsf == tamt) {
+        System.out.println(asf + ".");
+        return;
+      }
+  
+      for (int i = 0; i < coins.length; i++) {
+        if (amtsf < tamt)
+          coinChange4(coins, amtsf + coins[i], tamt, asf + coins[i] + "-");
+      }
+    }
 }
