@@ -62,5 +62,19 @@ public class day61 {
                 solution(str.substring(patternMatching.length()) , rop , map , op);
             }
         }
-      }
+    }
+
+    public static void wordBreak(String str, String ans, HashSet<String> dict) {
+        if(str.length() == 0){
+            System.out.println(ans);
+            return;
+        }
+        
+        for(int i = 0; i < str.length(); i++){
+            String left = str.substring(0 , i+1);
+            if(dict.contains(left)){
+                wordBreak(str.substring(i+1) , ans + left + " ", dict);
+            }
+        }
+    }
 }
