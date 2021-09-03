@@ -1,3 +1,4 @@
+import java.util.*;
 public class day61 {
     public static int solution(String[] words, int[] farr, int[] score, int idx) {
         if(idx == words.length){
@@ -24,4 +25,42 @@ public class day61 {
         
         return Math.max(max1 , max2);
     }
+
+    public static void solution(String str, String pattern, HashMap<Character, String> map, String op) {
+        if(pattern.length() == 0){
+            if(str.length() == 0){
+                boolean[] check = new boolean[26];
+                for(int i = 0; i < op.length(); i++){
+                    char ch = op.charAt(i);
+                    if(!check[ch - 'a']){
+                        check[ch - 'a'] = true;
+                        System.out.print(ch+" -> "+map.get(ch)+", ");
+                    }
+                }
+                System.out.print("."+"\n");
+            }
+            return;
+        }
+        char chp = pattern.charAt(0);
+        String rop = pattern.substring(1);
+        
+        if(!map.containsKey(chp)){
+            for(int i = 0; i < str.length(); i++){
+                String cp = str.substring(0 , i+1);
+                String ros = str.substring(i+1);
+                
+                map.put(chp , cp);
+                solution(ros , rop , map , op);
+                map.remove(chp);
+            }
+        }
+        
+        else{
+            String patternMatching = map.get(chp);
+            String patterntocheck = str.length() >= patternMatching.length() ? str.substring(0 , patternMatching.length()) : "-1";
+            if(patterntocheck.equals(patternMatching)){
+                solution(str.substring(patternMatching.length()) , rop , map , op);
+            }
+        }
+      }
 }
