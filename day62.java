@@ -48,16 +48,68 @@ public class day62 {
     }
   }
   public static void getMaxGoldHelper(int[][] arr, int i, int j, boolean[][] visited, ArrayList<Integer> bag){
-    if (i < 0  || j < 0 || i >= arr.length || j >= arr[0].length || arr[i][j] == 0 || visited[i][j] == true) {
-    return;
+      if (i < 0  || j < 0 || i >= arr.length || j >= arr[0].length || arr[i][j] == 0 || visited[i][j] == true) {
+      return;
+    }
+      
+      bag.add(arr[i][j]);
+      visited[i][j] = true;
+      
+      getMaxGoldHelper(arr, i - 1, j, visited, bag);
+      getMaxGoldHelper(arr, i , j + 1, visited, bag);
+      getMaxGoldHelper(arr, i , j - 1, visited, bag);
+      getMaxGoldHelper(arr, i + 1, j, visited, bag);
   }
+
+  public static void solution(String str, int minRemoval, HashSet<String> ans) {
+    if (minRemoval == 0) {
+      if (isValid(str)) {
+        if (!ans.contains(str)) {
+          System.out.println(str);
+          ans.add(str);
+        }
+      }
+      return;
+    }
     
-    bag.add(arr[i][j]);
-    visited[i][j] = true;
+    StringBuilder sb = new StringBuilder(str);
+    for (int i = 0; i < str.length(); i++) {
+      sb.deleteCharAt(i);
+      solution(sb.toString(), minRemoval - 1, ans);
+      sb.insert(i , str.charAt(i));                 
+    }
+  }
+
+  public static int getMin(String str) {
+    Stack<Character> st = new Stack<>();
     
-    getMaxGoldHelper(arr, i - 1, j, visited, bag);
-    getMaxGoldHelper(arr, i , j + 1, visited, bag);
-    getMaxGoldHelper(arr, i , j - 1, visited, bag);
-    getMaxGoldHelper(arr, i + 1, j, visited, bag);
+    for (int i = 0; i < str.length(); i++) {
+      char ch = str.charAt(i);
+      if (ch == '(') st.push(ch);
+      else if(ch == ')'){
+        if (st.size() == 0 || st.peek() != '('){
+            st.push(ch);
+            continue;
+        }
+        st.pop();
+      }
+    }
+    return st.size();
+  }
+  public static boolean isValid(String str) {
+    Stack<Character> st = new Stack<>();
+    
+    for (int i = 0; i < str.length(); i++) {
+      char ch = str.charAt(i);
+      if (ch == '(') st.push(ch);
+      else if(ch == ')'){
+        if (st.size() == 0 || st.peek() != '('){
+            st.push(ch);
+            return false;
+        }
+        st.pop();
+      }
+    }
+    return st.size() == 0;
   }
 }
