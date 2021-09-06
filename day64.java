@@ -1,3 +1,4 @@
+import java.util.*;
 public class day64 {
     public char slowestKey(int[] releaseTimes, String keysPressed) {
         int time = releaseTimes[0];
@@ -15,5 +16,38 @@ public class day64 {
             }
         }
         return ch;
+    }
+
+    class Node{
+        int data;
+        Node left, right;
+        Node(int data){
+            this.data = data;
+            left = null;
+            right = null;
+        }
+    }
+
+    public static ArrayList<Integer> printNearNodes(Node root,int low,int high) {
+	    ArrayList<Integer> ans = new ArrayList<>();
+	    pir(root , low , high , ans);
+	    return ans;
+    }
+    
+    public static void pir(Node root,int low,int high, ArrayList<Integer> ans){
+        if(root == null) return;
+        
+        if(root.data < low ){
+           pir(root.right , low , high , ans); 
+        }
+        
+        else if(root.data > high){
+            pir(root.left , low , high , ans); 
+        }
+        else{
+            pir(root.left , low , high , ans);
+            ans.add(root.data);
+            pir(root.right , low , high , ans); 
+        }
     }
 }
