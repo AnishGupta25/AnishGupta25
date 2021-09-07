@@ -23,4 +23,40 @@ public class day65 {
         }
         return prev;
     }
+
+    class GfG{
+        int minEle;
+        Stack<Integer> st;
+        GfG(){
+            st = new Stack<>();
+        }
+        int getMin(){
+            if(st.isEmpty()) return (-1);
+            
+            return minEle;
+        }
+        int pop(){
+            if(st.isEmpty()) return (-1);
+            
+            int t = st.pop();
+            if(t < minEle){
+                int temp = minEle;
+                minEle = 2*minEle - t;
+                return temp;
+            }
+            return t;
+        }
+        void push(int x){
+            if(st.size() == 0){
+                minEle = x;
+                st.push(x);
+                return;
+            }
+            if(x < minEle){
+                st.push(2*x - minEle);
+                minEle = x;
+            }
+            else st.push(x);
+        }	
+    }
 }
