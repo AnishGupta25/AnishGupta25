@@ -69,4 +69,35 @@ public class day65 {
         if(count == 3) return true;
         return false;
     }
+
+    class Node{
+        int data;
+        Node next;
+        Node(int d){
+            data=d;
+            next=null;
+        }
+    }
+
+    public Node rotate(Node head, int k) {
+        Node temphead = head;
+        int count = 1;
+        while(count < k && temphead != null){
+            count++;
+            temphead = temphead.next;
+        }
+        if(temphead == null) return head;
+        
+        Node kthnode = temphead;
+        
+        while(temphead.next != null){
+            temphead = temphead.next;
+        }
+        temphead.next = head;
+        
+        head = kthnode.next;
+        kthnode.next = null;
+        
+        return head;
+    }
 }
