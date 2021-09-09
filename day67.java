@@ -61,7 +61,34 @@ public class day67 {
             slow = slow.next;
             fast = fast.next.next;
         }
+        return slow;
+    }
 
+    public void reorderList(ListNode head) {
+        if(head == null) return;
+        
+        ListNode mid = Mid(head);
+        ListNode rev = reverse(mid);
+        ListNode temp = head;
+        while(temp != null && rev != null){
+            ListNode next1 = temp.next;
+            ListNode next2 = rev.next;
+            
+            temp.next = rev;
+            rev.next = next1;
+            temp = next1;
+            rev = next2;
+        }
+    }
+    
+    public ListNode Mid(ListNode head){
+        ListNode fast = head;
+        ListNode slow = head;
+        
+        while(fast.next != null && fast.next.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
         return slow;
     }
 }
