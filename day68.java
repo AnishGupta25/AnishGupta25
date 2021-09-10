@@ -1,3 +1,4 @@
+import java.util.*;
 public class day68 {
     public int search(int[] nums, int target) {
         int i = 0 , j = nums.length - 1;
@@ -33,5 +34,22 @@ public class day68 {
             else i = mid + 1;
         }
         return i;
+    }
+
+    public static int minIndexChar(String str, String patt){
+        HashMap<Character, Integer> hm = new HashMap<>();
+        
+        int minIndex = Integer.MAX_VALUE;
+     
+        int m = str.length();
+        int n = patt.length();
+     
+        for (int i = 0; i < m; i++)
+            if(!hm.containsKey(str.charAt(i))) hm.put(str.charAt(i),i);
+     
+        for (int i = 0; i < n; i++)
+            if (hm.containsKey(patt.charAt(i)) && hm.get(patt.charAt(i)) < minIndex) minIndex = hm.get(patt.charAt(i));
+        if (minIndex != Integer.MAX_VALUE) return minIndex;
+        return -1;
     }
 }
