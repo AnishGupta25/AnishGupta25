@@ -23,4 +23,37 @@ public class day72 {
         }
         return true;
     }
+
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode() {}
+        TreeNode(int val) { this.val = val; }
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    int sum = 0;
+    public int sumOfLeftLeaves(TreeNode root) {
+        if(root == null) return sum;
+        
+        sumOfLeftLeavesHelper(root , 0);
+        return sum;
+    }
+    
+    public void sumOfLeftLeavesHelper(TreeNode root , int idx){
+        if(root == null) return;
+        
+        if(idx == -1 &&(root.left == null && root.right == null)){
+            sum += root.val;
+            return;
+        }
+        
+        sumOfLeftLeavesHelper(root.left , -1);
+        sumOfLeftLeavesHelper(root.right , 1);
+    }
 }
