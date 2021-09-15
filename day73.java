@@ -81,4 +81,55 @@ public class day73 {
         if(Arrays.equals(arr1 , arr2)) return true;
         return false;
     }
+
+    public static class ListNode {
+        int val = 0;
+        ListNode next = null;
+
+        ListNode(int val) {
+            this.val = val;
+        }
+    }
+    
+    public static void reverse(ListNode start , ListNode end){
+        ListNode prev = null;
+        ListNode cur = start;
+        
+        while(cur != end){
+            ListNode fwd = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = fwd;
+        }
+        cur.next = prev;
+    }
+
+    public static ListNode reverseInRange(ListNode head, int n, int m) {
+        
+        ListNode fast = head;
+        ListNode slow = head;
+        ListNode prev = null;
+        int end = n < m ? m : n;
+        int start = n < m ? n : m;
+        while(end-- > 1){
+            fast = fast.next;
+        }
+        ListNode tail = fast.next;
+        while(start-- > 1){
+            prev = slow;
+            slow = slow.next;
+        }
+        reverse(slow , fast);
+        if(prev == null){
+            head = fast;
+            slow.next = tail;
+        }
+        else{
+            prev.next = fast;
+            slow.next = tail;
+        }
+        
+        
+        return head;
+    }
 }
