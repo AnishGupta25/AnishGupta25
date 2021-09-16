@@ -59,4 +59,49 @@ public class day74 {
         maxAreaOfIslandHelper(grid , row , col + 1 , vis);
         maxAreaOfIslandHelper(grid , row + 1 , col , vis);
     }
+
+    public static class ListNode {
+        int val = 0;
+        ListNode next = null;
+
+        ListNode(int val) {
+            this.val = val;
+        }
+    }
+
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        if(l1 == null || l2 == null) return l1 == null ? l2 : l1;
+        ListNode dummy = new ListNode(-1);
+        ListNode ans = dummy;
+        l1 = reverse(l1);
+        l2 = reverse(l2);
+        int carry = 0;
+        while(l1 != null || l2 != null || carry > 0){
+            int val1 = l1 != null ? l1.val : 0;
+            int val2 = l2 != null ? l2.val : 0;
+            
+            int sum = val1 + val2 + carry;
+            ListNode node = new ListNode(sum % 10);
+            carry = sum / 10;
+            ans.next = node;
+            ans = node;
+            if(l1 != null) l1 = l1.next;
+            if(l2 != null) l2 = l2.next;
+        }
+        ans = reverse(dummy.next);
+        return ans;
+    }
+    
+    public static ListNode reverse(ListNode head){
+        ListNode prev = null;
+        ListNode cur = head;
+        
+        while(cur != null){
+            ListNode fwd = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = fwd;
+        }
+        return prev;
+    }
 }
