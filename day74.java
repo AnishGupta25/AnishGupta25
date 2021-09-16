@@ -28,4 +28,35 @@ public class day74 {
         }
         return ans;
     }
+
+    public int maxAreaOfIsland(int[][] grid) {
+        int ans = 0;
+        for(int i = 0; i < grid.length; i++){
+            for(int j = 0; j < grid[0].length; j++){
+                if(grid[i][j] == 1){
+                    boolean[][] vis = new boolean[grid.length][grid[0].length];
+                    count = 0;
+                    maxAreaOfIslandHelper(grid , i , j , vis);
+                    if(count > ans) ans = count;
+                    count = 0;
+                }
+            }
+        }
+        return ans;
+    }
+    
+    public int count;
+    public void maxAreaOfIslandHelper(int[][] grid , int row , int col , boolean[][] vis){
+        if(row < 0 || col < 0 || row >= grid.length || col >= grid[0].length || vis[row][col] || grid[row][col] != 1) return;
+        
+        if(grid[row][col] == 1){
+            vis[row][col] = true;
+            count++;
+        }
+        
+        maxAreaOfIslandHelper(grid , row - 1 , col , vis);
+        maxAreaOfIslandHelper(grid , row , col - 1 , vis);
+        maxAreaOfIslandHelper(grid , row , col + 1 , vis);
+        maxAreaOfIslandHelper(grid , row + 1 , col , vis);
+    }
 }
