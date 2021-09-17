@@ -42,4 +42,28 @@ public class day75 {
         
         return root;
     }
+
+    public int[] intersect(int[] nums1, int[] nums2) {
+        if(nums1.length == 0 || nums2.length == 0) return new int[1];
+        
+        ArrayList<Integer> a = new ArrayList<>();
+        
+        HashMap<Integer , Integer> map = new HashMap<>();
+        for(int i : nums2){
+            map.put(i , map.getOrDefault(i , 0) + 1);
+        }
+        
+        for(int i : nums1){
+            if(map.keySet().contains(i) && map.get(i) > 0){
+                a.add(i);
+                map.put(i , map.get(i) - 1);
+            }
+        }
+        
+        int[] arr = new int[a.size()];
+        for(int i = 0; i < a.size(); i++){
+            arr[i] = a.get(i);
+        }
+        return arr;
+    }
 }
