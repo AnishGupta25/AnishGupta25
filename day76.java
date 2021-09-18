@@ -88,4 +88,19 @@ public class day76 {
 
         return true;
     }
+
+    List<Integer> querySum(int n, int arr[], int q, int queries[]){
+        List<Integer> list = new ArrayList<>();
+        
+        for(int i = 1; i < queries.length; i += 2){
+            int l = queries[i-1];
+            int r = queries[i];
+            int sum = 0;
+            for(int j = l - 1; j < r; j++){
+                sum += arr[j];
+            }
+            list.add(sum);
+        }
+        return list;
+    }
 }
