@@ -103,4 +103,17 @@ public class day76 {
         }
         return list;
     }
+
+    public boolean isPalindrome(int x) {
+        if(x < 0) return false;
+        
+        int temp = x;
+        int x1 = 0;
+        while(temp > 0){
+            int rem = temp % 10;
+            x1 = x1*10 + rem;
+            temp /= 10;
+        }
+        return x1 == x;
+    }
 }
