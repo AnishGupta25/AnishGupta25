@@ -50,4 +50,18 @@ public class day77 {
         }
         return ans;
     }
+
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int ans = 0;
+        int temp = 0;
+        
+        for(int i = 0; i < nums.length; i++){
+            if(nums[i] == 0){
+                ans = Math.max(temp , ans);
+                temp = 0;
+            } 
+            else temp++;
+        }
+        return Math.max(ans , temp);
+    }
 }
