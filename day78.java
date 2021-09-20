@@ -39,4 +39,35 @@ public class day78 {
             }
         }
     }
+
+    public List<String> letterCasePermutation(String s) {
+        List<String> list = new ArrayList<>();
+        StringBuilder sb = new StringBuilder(s.length());
+        Permutation(list, s , sb , 0);
+        return list;
+    }
+    
+    public void Permutation(List<String> list , String str , StringBuilder sb , int idx){
+        if(idx == str.length()){
+            list.add(sb.toString());
+            return;
+        }
+        
+        int ch = (int)(str.charAt(idx));
+        
+        if(ch >= 97 && ch <= 122){
+            sb.append((char)(ch-32));
+            Permutation(list , str , sb , idx+1);
+            sb.deleteCharAt(sb.length()-1);
+        }
+        else if(ch >= 65 && ch <= 90){
+            sb.append((char)(ch+32));
+            Permutation(list , str , sb , idx+1);
+            sb.deleteCharAt(sb.length()-1);
+        }
+        
+        sb.append((char)ch);
+        Permutation(list , str , sb , idx+1);
+        sb.deleteCharAt(sb.length()-1);
+    }
 }
