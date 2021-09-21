@@ -1,3 +1,4 @@
+import java.util.*;
 public class day79 {
     public int expressiveWords(String s, String[] words) {
         int res = 0;
@@ -60,5 +61,22 @@ public class day79 {
         }
         
         return Math.max(nums[n-1] , nums[n-2]);
+    }
+
+    public int minDeletions(String s) {
+        int ans = 0;
+        int arr[] = new int[26];
+        for(int i = 0; i < s.length(); i++){
+            arr[s.charAt(i) - 'a']++;
+        }
+        HashSet<Integer> set = new HashSet<>();
+        for(int i = 0; i < 26; i++){
+            while(arr[i] > 0 && set.contains(arr[i])){
+                arr[i]--;
+                ans++;
+            }
+            set.add(arr[i]);
+        }
+        return ans;
     }
 }
