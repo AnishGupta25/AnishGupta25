@@ -48,4 +48,16 @@ public class day80 {
         }
         return head;
     }
+
+	public static boolean isCyclePresentInLL(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+        
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(fast == slow) return true;
+        }
+        return false;
+    }
 }
