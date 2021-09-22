@@ -78,4 +78,39 @@ public class day80 {
         }
         return null;
     }
+
+	public static int size(ListNode head){
+        ListNode temp = head;
+        int ans = 0;
+        while(temp != null){
+            ans++;
+            temp = temp.next;
+        }
+        return ans;
+    }
+
+    public static ListNode IntersectionNodeInTwoLL(ListNode headA, ListNode headB) {
+        int size1 = size(headA);
+        int size2 = size(headB);
+        
+        if(size1 > size2){
+            while(size1 != size2){
+                headA = headA.next;
+                size1--;
+            }
+        }
+        if(size1 < size2){
+            while(size2 != size1){
+                headB = headB.next;
+                size2--;
+            }
+        }
+        
+        while(headA != null && headB != null){
+            if(headA == headB)return headA;
+            headA = headA.next;
+            headB = headB.next;
+        }
+        return null;
+    }
 }
