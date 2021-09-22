@@ -24,4 +24,28 @@ public class day80 {
 	    }
 	    return false;
 	}
+
+	public static class ListNode {
+        int val = 0;
+        ListNode next = null;
+
+        ListNode(int val) {
+            this.val = val;
+        }
+    }
+
+	public static ListNode removeDuplicates(ListNode head) {
+        ListNode temp = head;
+        
+        while(temp.next != null){
+            int val = temp.val;
+            if(temp.next.val == val){
+                temp.next = temp.next.next;
+            }
+            else{
+                temp = temp.next;
+            } 
+        }
+        return head;
+    }
 }
