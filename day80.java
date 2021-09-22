@@ -60,4 +60,22 @@ public class day80 {
         }
         return false;
     }
+
+	public static ListNode CycleNode(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+        
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(fast == slow){
+                while(head != slow){
+                    head = head.next;
+                    slow = slow.next;
+                }
+                return slow;
+            }
+        }
+        return null;
+    }
 }
