@@ -116,4 +116,19 @@ public class day81 {
         
         return zero.next;
     }
+
+    public String breakPalindrome(String palindrome) {
+        if(palindrome.length() == 1) return "";
+        
+        char[] str = palindrome.toCharArray();
+        for(int i = 0; i < str.length / 2; i++){
+            if(str.length % 2 == 1 && i == str.length / 2) continue;
+            if(str[i] != 'a') {
+                str[i] = 'a';
+                return String.valueOf(str);
+            }
+        }
+        str[str.length - 1] ='b';
+        return String.valueOf(str);
+    }
 }
