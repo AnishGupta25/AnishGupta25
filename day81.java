@@ -82,4 +82,38 @@ public class day81 {
         
         return sh.next;
     }
+
+    public static ListNode segregate012(ListNode head) {
+        ListNode one = new ListNode(-1);
+        ListNode onet = one;
+        
+        ListNode zero = new ListNode(-1);
+        ListNode zerot = zero;
+        
+        ListNode two = new ListNode(-1);
+        ListNode twot = two;
+        
+        ListNode temp = head;
+        while(temp != null){
+            if(temp.val == 0){
+                zerot.next = temp;
+                zerot = zerot.next;
+            }
+            if(temp.val == 1){
+                onet.next = temp;
+                onet = onet.next;
+            }
+            if(temp.val == 2){
+                twot.next = temp;
+                twot = twot.next;
+            }
+            temp = temp.next;
+        }
+        twot.next = null;
+        
+        onet.next = two.next;
+        zerot.next = one.next;
+        
+        return zero.next;
+    }
 }
