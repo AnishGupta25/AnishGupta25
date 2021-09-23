@@ -42,4 +42,44 @@ public class day81 {
         st.next = lh.next;
         return st;
     }
+
+    public static ListNode getPivot(ListNode head , int idx){
+        ListNode temp = head;
+        
+        while(idx-- > 0){
+            temp = temp.next;
+        }
+        return temp;
+    }
+    
+    public static ListNode segregate(ListNode head, int pivotIdx) {
+        ListNode pivot = getPivot(head , pivotIdx);
+        int pd = pivot.val;
+        
+        ListNode sh = new ListNode(-1);
+        ListNode st = sh;
+        
+        ListNode lh = new ListNode(-1);
+        ListNode lt = lh;
+        
+        ListNode cur = head;
+        while(cur != null){
+            if(cur == pivot){}
+            else if(cur.val <= pd){
+                st.next = cur;
+                st = st.next;
+            }
+            else if(cur.val > pd){
+                lt.next = cur;
+                lt = lt.next;
+            }
+            cur = cur.next;
+        }
+        
+        lt.next = null;
+        st.next = pivot;
+        pivot.next = lh.next;
+        
+        return sh.next;
+    }
 }
