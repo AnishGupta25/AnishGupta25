@@ -32,13 +32,13 @@ public class day84 {
         }
     }
 
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
+    public TreeNode buildTree1(int[] preorder, int[] inorder) {
         int n = inorder.length;
-        TreeNode root = BuiltHelper(preorder , inorder , 0 , n-1 , 0 , n-1);
+        TreeNode root = BuiltHelper1(preorder , inorder , 0 , n-1 , 0 , n-1);
         return root;
     }
     
-    public TreeNode BuiltHelper(int[] preorder, int[] inorder , int ps , int pe , int is , int ie){
+    public TreeNode BuiltHelper1(int[] preorder, int[] inorder , int ps , int pe , int is , int ie){
         if(ps > pe) return null;
         
         TreeNode node = new TreeNode(preorder[ps]);
@@ -52,8 +52,31 @@ public class day84 {
         }
         int cls = k - is;
         
-        node.left = BuiltHelper(preorder , inorder , ps+1 , ps+cls , is , k-1);
-        node.right = BuiltHelper(preorder , inorder , ps+cls+1 , pe , k+1 , ie);
+        node.left = BuiltHelper1(preorder , inorder , ps+1 , ps+cls , is , k-1);
+        node.right = BuiltHelper1(preorder , inorder , ps+cls+1 , pe , k+1 , ie);
+        
+        return node;
+    }
+
+    public TreeNode buildTree2(int[] inorder, int[] postorder) {
+        int n = inorder.length;
+        HashMap<Integer , Integer> map = new HashMap<>();
+        for(int i = 0; i < n; i++){
+            map.put(inorder[i] , i);
+        }
+        return BuiltHelper2(postorder , 0 , n-1 , 0 , n-1 , map);
+    }
+    
+    public TreeNode BuiltHelper2(int[] postorder , int is , int ie , int ps , int pe , HashMap<Integer , Integer> map){
+        if(is > ie) return null;
+        
+        TreeNode node = new TreeNode(postorder[pe]);
+        int k = map.get(node.val);
+        
+        int cls = k - is;
+        
+        node.left = BuiltHelper2(postorder , is , k-1 , ps , ps+cls-1 , map);
+        node.right = BuiltHelper2(postorder , k+1 , ie , ps+cls , pe-1 , map);
         
         return node;
     }
