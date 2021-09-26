@@ -20,6 +20,12 @@ public class day83 {
         return max_len;
     }
 
+    public class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int x) { val = x; }
+    }
+
     public void deleteNode(ListNode node) {
         if(node.next.next != null){
             node.val = node.next.val;
