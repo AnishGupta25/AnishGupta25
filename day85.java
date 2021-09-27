@@ -1,3 +1,4 @@
+import java.util.*;
 public class day85 {
     public class Codec {
         public class TreeNode {
@@ -35,4 +36,21 @@ public class day85 {
         }
     }
     
+    public int numUniqueEmails(String[] emails) {
+        if(emails.length == 1) return 1;
+        
+        HashSet<String> set = new HashSet<>();
+        for(String s : emails){
+            String[] str = s.split("@");
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0; i < str[0].length(); i++){
+                if(str[0].charAt(i) == '+') break;
+                else if(str[0].charAt(i) == '.') continue;
+                sb.append(str[0].charAt(i));
+            }
+            sb.append("@" + str[1]);
+            set.add(sb.toString());
+        }
+        return set.size();
+    }
 }
