@@ -1,3 +1,4 @@
+import java.util.*;
 public class day86 {
     public void sortColors(int[] nums) {
         if(nums.length == 1) return;
@@ -23,4 +24,29 @@ public class day86 {
             }
         }
     }
+
+    public Stack<Integer> sort(Stack<Integer> s){
+	    if(!s.isEmpty()){
+	        sortst(s);
+	    }
+	    return s;
+	}
+	
+	public void sortst(Stack<Integer> st){
+	    if(!st.isEmpty()){
+	        int temp = st.pop();
+	        sortst(st);
+	        InsertSort(st , temp);
+	    }
+	}
+	public void InsertSort(Stack<Integer> st , int elm){
+	    if(st.isEmpty() || st.peek() < elm){
+	        st.push(elm);
+	        return;
+	    }
+	    
+	    int temp = st.pop();
+	    InsertSort(st , elm);
+	    st.push(temp);
+	}
 }
