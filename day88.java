@@ -23,4 +23,30 @@ public class day88 {
         Collections.reverse(list);
         return list;
     }
+
+    public static class TreeNode {
+        int val = 0;
+        TreeNode left = null;
+        TreeNode right = null;
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+    }
+
+    public static TreeNode constructFromInOrder(int[] inOrder) {
+        return treeCons(inOrder , 0 , inOrder.length - 1);
+    }
+    
+    public static TreeNode treeCons(int[] inorder , int inS , int inE){
+        if(inS > inE) return null;
+        
+        int mid = (inS + inE) / 2;
+        TreeNode node = new TreeNode(inorder[mid]);
+        
+        node.left = treeCons(inorder , inS , mid - 1);
+        node.right = treeCons(inorder , mid + 1 , inE);
+        
+        return node;
+    }
 }
