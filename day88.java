@@ -49,4 +49,22 @@ public class day88 {
         
         return node;
     }
+
+    public TreeNode bstFromPreorder(int[] preorder) {
+        i = 0;
+        return BSTcon(preorder , Integer.MIN_VALUE , Integer.MAX_VALUE);
+    }
+    int i;
+    public TreeNode BSTcon(int[] preorder , int min , int max){
+        TreeNode node = new TreeNode(preorder[i]);
+        
+        if(i+1 != preorder.length && preorder[i+1] < preorder[i] && preorder[i+1] > min){
+            node.left = BSTcon(preorder , min , preorder[i++]);
+        } 
+        if(i+1 != preorder.length && preorder[i+1] > preorder[i] && preorder[i+1] < max){
+            node.right = BSTcon(preorder , preorder[i++] , max);
+        } 
+        
+        return node;
+    }
 }
