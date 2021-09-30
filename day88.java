@@ -67,4 +67,44 @@ public class day88 {
         
         return node;
     }
+
+    class Node{
+        int data;
+        Node left , right;
+        Node(int data){
+            this.data = data;
+        }
+    }
+
+    public Node constructBST(int[] arr){
+        Queue<Pair> pq = new ArrayDeque<>();
+        pq.add(new Pair(null , Integer.MIN_VALUE , Integer.MAX_VALUE));
+        Node root = null;
+        int idx = 0;
+        while(pq.size() > 0 && idx < arr.length){
+            Pair temp = pq.remove();
+            if(arr[idx] < temp.min || arr[idx] > temp.max) continue;
+            
+            Node node = new Node(arr[idx]);
+            
+            if(temp.par == null) root = node;
+            else{
+                if(temp.par.data > node.data) temp.par.left = node;
+                else temp.par.right = node;
+            }
+            
+            pq.add(new Pair(node , temp.min , node.data));
+            pq.add(new Pair(node , node.data , temp.max));
+        }
+        return root;
+    }
+    class Pair{
+        Node par;
+        int min , max;
+        Pair(Node par , int min , int max){
+            this.par = par;
+            this.min = min;
+            this.max = max;
+        }
+    }
 }
