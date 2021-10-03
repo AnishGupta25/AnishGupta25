@@ -82,4 +82,34 @@ public class day91 {
         }
         return true;
     }
+
+    public static class TreeNode {
+        int val = 0;
+        TreeNode left = null;
+        TreeNode right = null;
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+    }
+
+    public List<Integer> rightSideView(TreeNode root) {
+        if(root == null) return new ArrayList<>();
+        
+        ArrayList<Integer> res = new ArrayList<>();
+        Queue<TreeNode> qu = new ArrayDeque<>();
+        qu.add(root);
+        
+        while(!qu.isEmpty()){
+            int size = qu.size();
+            TreeNode temp = null;
+            while(size-- > 0){
+                temp = qu.remove();
+                if(temp.left != null) qu.add(temp.left);
+                if(temp.right != null) qu.add(temp.right);
+            }
+            res.add(temp.val);
+        }
+        return res;
+    }
 }
