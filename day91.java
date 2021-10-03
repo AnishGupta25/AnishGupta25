@@ -171,4 +171,46 @@ public class day91 {
         }
         return max;
     }
+
+    static class VPair{
+        TreeNode node;
+        int lvl;
+        VPair(TreeNode node , int lvl){
+            this.node = node;
+            this.lvl = lvl;
+        }
+    }
+
+    public static ArrayList<ArrayList<Integer>> verticalOrderTraversal(TreeNode root) {
+        HashMap<Integer , ArrayList<Integer>> map = new HashMap<>();
+        Queue<VPair> pq = new ArrayDeque<>();
+        pq.add(new VPair(root , 0));
+        int min = Integer.MAX_VALUE , max = Integer.MIN_VALUE;
+        while(!pq.isEmpty()){
+            VPair temp = pq.remove();
+            max = Math.max(max , temp.lvl);
+            min = Math.min(min , temp.lvl);
+            if(!map.containsKey(temp.lvl)){
+                ArrayList<Integer> arr = new ArrayList<>();
+                arr.add(temp.node.val);
+                map.put(temp.lvl , arr);
+            }
+            else{
+                ArrayList<Integer> arr = map.get(temp.lvl);
+                arr.add(temp.node.val);
+                map.put(temp.lvl , arr);
+            }
+            
+            if(temp.node.left != null) pq.add(new VPair(temp.node.left , temp.lvl - 1));
+            if(temp.node.right != null) pq.add(new VPair(temp.node.right , temp.lvl + 1));
+        }
+        
+        ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+        
+        for(int i = min; i <= max; i++){
+            list.add(map.get(i));
+        }
+        return list;
+
+    }
 }
