@@ -141,4 +141,34 @@ public class day91 {
         
         return dummy.next;
     } 
+
+    class Node2{
+    int data;
+    Node2 left, right;
+
+    Node2(int item){
+        data = item;
+        left = right = null;
+    }
+} 
+
+    int getMaxWidth(Node2 root) {
+        if(root == null) return 0;
+        
+        Queue<Node2> qu = new ArrayDeque<>();
+        qu.add(root);
+        int max = 1;
+        
+        while(!qu.isEmpty()){
+            int n = qu.size();
+            max = Math.max(n , max);
+            
+            while(n-- > 0){
+                Node2 node = qu.remove();
+                if(node.left != null) qu.add(node.left);
+                if(node.right != null) qu.add(node.right);
+            }
+        }
+        return max;
+    }
 }
