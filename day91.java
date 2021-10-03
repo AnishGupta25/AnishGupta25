@@ -39,4 +39,47 @@ public class day91 {
           this.par = par;
         }
     }
+
+    public void solveSudoku(char[][] board) {
+        solveSudokuHelper(board , 0 , 0);
+    }
+    
+    public boolean solveSudokuHelper(char[][] board , int i , int j){
+        if(j == board[0].length){
+            i = i + 1;
+            j = 0;
+        }
+        
+        if(i == board.length) return true;
+        
+        if(board[i][j] != '.') return solveSudokuHelper(board , i , j+1);
+        
+        for(char num = '1'; num <= '9'; num++){
+            if(isValid(board, i , j , num)){
+                board[i][j] = num;
+                boolean solved = solveSudokuHelper(board , i , j+1);
+                if(solved) return true;
+                else board[i][j] = '.';
+            }
+        }
+        return false;
+    }
+    
+    public boolean isValid(char[][] board , int i , int j , char num){
+        for (int r = 0; r < board.length; r++) {
+          if (board[r][j] == num) return false;
+        }
+        for(int c = 0; c < board.length; c++){
+            if (board[i][c] == num) return false;
+        }
+        
+        int x = (i / 3) * 3;
+        int y = (j / 3) * 3;
+        for(int r = 0; r < 3; r++){
+            for(int c = 0; c < 3; c++){
+                if(board[x + r][y + c] == num) return false;
+            }
+        }
+        return true;
+    }
 }
