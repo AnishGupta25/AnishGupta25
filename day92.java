@@ -15,4 +15,30 @@ public class day92 {
         if(count == S.length()) return -1;
         return ans;
     }
+
+    public class ListNode{
+        int val;
+        ListNode next;
+        ListNode(int val , ListNode next){
+            this.val = val;
+            this.next = next;
+        }
+    }
+
+    public ListNode swapNodes(ListNode head, int k) {
+        ListNode fast = head , slow = head , cur = head;
+        int count = 1;
+        
+        while(cur != null){
+            if(count < k) slow = slow.next;
+            if(count > k) fast = fast.next;
+            cur = cur.next;
+            count++;
+        }
+        int temp = fast.val;
+        fast.val = slow.val;
+        slow.val = temp;
+        
+        return head;
+    }
 }
