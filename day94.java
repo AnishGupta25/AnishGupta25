@@ -83,4 +83,30 @@ public class day94 {
         width(node.left , lvl-1);
         width(node.right , lvl+1);
     }
+
+    public static ArrayList<Integer> TopView(TreeNode root) {
+        min = Integer.MAX_VALUE;
+        max = Integer.MIN_VALUE;
+        width(root , 0);
+        
+        int rvl = -min;
+        int w = max - min + 1;
+        
+        ArrayList<Integer> list = new ArrayList<>();
+        for(int i = 0; i < w; i++) {
+            list.add(-1);
+        }
+        
+        Queue<Pair> pq = new ArrayDeque<>();
+        pq.add(new Pair(root , rvl));
+        
+        while(!pq.isEmpty()){
+            Pair temp = pq.remove();
+            if(list.get(temp.lvl) == -1) list.set(temp.lvl , temp.node.val);
+            
+            if(temp.node.left != null) pq.add(new Pair(temp.node.left , temp.lvl-1));
+            if(temp.node.right != null) pq.add(new Pair(temp.node.right , temp.lvl+1));
+        }
+        return list;
+    }
 }
