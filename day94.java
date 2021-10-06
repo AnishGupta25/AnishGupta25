@@ -1,3 +1,4 @@
+import java.util.*;
 public class day94 {
     public int editDistance(String s, String t) {
         int n = s.length() , m = t.length();
@@ -12,5 +13,16 @@ public class day94 {
             }
         }
         return dp[n][m];
+    }
+
+    public List<Integer> findDuplicates(int[] nums) {
+        List<Integer> res = new ArrayList<>();
+        
+        for(int i = 0; i < nums.length; i++){
+            int idx = Math.abs(nums[i]) - 1;
+            if(nums[idx] < 0) res.add(idx+1);
+            nums[idx] *= -1;
+        }
+        return res;
     }
 }
