@@ -25,4 +25,62 @@ public class day94 {
         }
         return res;
     }
+
+    public static class TreeNode {
+        int val = 0;
+        TreeNode left = null;
+        TreeNode right = null;
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+    }
+
+    public static class Pair{
+        TreeNode node;
+        int lvl;
+        Pair(TreeNode node , int lvl){
+            this.node = node;
+            this.lvl = lvl;
+        }
+    }
+    
+    static int min;
+    static int max;
+
+    public static ArrayList<Integer> BottomView(TreeNode root) {
+        min = Integer.MAX_VALUE;
+        max = Integer.MIN_VALUE;
+        width(root , 0);
+        
+        int rvl = -min;
+        int w = max - min + 1;
+        
+        ArrayList<Integer> list = new ArrayList<>();
+        for(int i = 0; i < w; i++) {
+            list.add(-1);
+        }
+        
+        Queue<Pair> pq = new ArrayDeque<>();
+        pq.add(new Pair(root , rvl));
+        
+        while(!pq.isEmpty()){
+            Pair temp = pq.remove();
+            list.set(temp.lvl , temp.node.val);
+            
+            if(temp.node.left != null) pq.add(new Pair(temp.node.left , temp.lvl-1));
+            if(temp.node.right != null) pq.add(new Pair(temp.node.right , temp.lvl+1));
+        }
+        return list;
+    }
+
+    public static void width(TreeNode node , int lvl){
+        if(node == null) return;
+        
+        min = Math.min(min , lvl);
+        max = Math.max(max , lvl);
+        
+        width(node.left , lvl-1);
+        width(node.right , lvl+1);
+    }
 }
