@@ -57,4 +57,25 @@ public class day95 {
             else return this.node.val - o.node.val;
         }
     }
+
+    public static ArrayList<ArrayList<Integer>> diagonalOrder(TreeNode root) {
+        ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+        Queue<TreeNode> qu = new ArrayDeque<>();
+        qu.add(root);
+        
+        while(qu.size() > 0){
+            int size = qu.size();
+            ArrayList<Integer> arr = new ArrayList<>();
+            while(size-- > 0){
+                TreeNode temp = qu.remove();
+                while(temp != null){
+                    arr.add(temp.val);
+                    if(temp.left != null) qu.add(temp.left);
+                    temp = temp.right;
+                }
+            }
+            list.add(arr);
+        }
+        return list;
+    }
 }
