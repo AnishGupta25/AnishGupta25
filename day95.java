@@ -78,4 +78,28 @@ public class day95 {
         }
         return list;
     }
+
+    int cam = 0;
+    public int minCameraCover(TreeNode root) {
+        if(root == null) return 0;
+        if(checkcam(root) == -1) cam++;
+        
+        return cam;
+    }
+    
+    public int checkcam(TreeNode root){
+        if(root == null) return 0;
+        
+        int ls = checkcam(root.left);
+        int rs = checkcam(root.right);
+        
+        if(ls == -1 || rs == -1){
+            cam++;
+            return 1;
+        } 
+        else if(ls == 1 || rs == 1){
+            return 0;
+        } 
+        else return -1;
+    }
 }
