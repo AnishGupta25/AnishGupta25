@@ -1,3 +1,4 @@
+import java.util.*;
 public class day97 {
     public int findK(int a[][], int n, int m, int k){
 	    int rmin = 0, cmin = 0, rmax = a.length - 1 , cmax = a[0].length - 1 , count = 1;
@@ -43,5 +44,39 @@ public class day97 {
             if(nums[i] > pos - i) return true;
         }
         return false;
+    }
+
+	class TreeNode {
+        int val = 0;
+        TreeNode left = null;
+        TreeNode right = null;
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+    }
+
+	public static ArrayList<ArrayList<Integer>> diagonalOrder(TreeNode root) {
+        if(root == null) return new ArrayList<ArrayList<Integer>>();
+        
+        ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+        Queue<TreeNode> qu = new ArrayDeque<>();
+        qu.add(root);
+        
+        while(qu.size() > 0){
+            int size = qu.size();
+            ArrayList<Integer> arr = new ArrayList<>();
+            while(size-- > 0){
+                TreeNode node = qu.remove();
+                while(node != null){
+                    arr.add(node.val);
+                    if(node.right != null) qu.add(node.right);
+                    node = node.left;
+                }
+            }
+            list.add(arr);
+        }
+        
+        return list;
     }
 }
