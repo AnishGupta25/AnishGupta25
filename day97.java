@@ -26,4 +26,22 @@ public class day97 {
 	    }
 	    return 0;
 	}
+
+	public boolean canJump(int[] nums) {
+        if(nums.length == 1) return true;
+        
+        for(int i = 0; i < nums.length - 1; i++){
+            if(nums[i] == 0){
+                if(!canpass(nums , i)) return false;
+            }
+        }
+        return true;
+    }
+    
+    public boolean canpass(int[] nums , int pos){
+        for(int i = pos - 1; i >= 0; i--){
+            if(nums[i] > pos - i) return true;
+        }
+        return false;
+    }
 }
