@@ -14,4 +14,19 @@ public class day100 {
         }
         return counter;
     }
+
+    public int guessNumber(int n) {
+        int i = 1, j = n;
+        
+        while(i <= j){
+            int mid = i + (j-i) / 2;
+            // int pick = guess(mid);
+            int pick = mid;
+            
+            if(pick == 0) return mid;
+            else if(pick == 1) i = mid + 1;
+            else if(pick == -1) j = mid - 1;
+        }
+        return -1;
+    }
 }
