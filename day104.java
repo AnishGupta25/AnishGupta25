@@ -24,4 +24,31 @@ public class day104 {
             this.val = val;
         }
     }
+
+    TreeNode pre , fst , snd;
+    public void recoverTree(TreeNode root) {
+        pre = fst = snd = null;
+        
+        helper(root);
+        
+        int temp = fst.val;
+        fst.val = snd.val;
+        snd.val = temp;
+    }
+    
+    public void helper1(TreeNode root){
+        if(root == null) return;
+        
+        helper1(root.left);
+        
+        if(pre != null && pre.val >= root.val){
+            if(fst == null){
+                fst = pre;
+            } 
+            snd = root;
+        }
+        pre = root;
+        
+        helper1(root.right);
+    }
 }
