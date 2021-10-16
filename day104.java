@@ -51,4 +51,44 @@ public class day104 {
         
         helper1(root.right);
     }
+    public static class Node {
+        int val = 0;
+        Node left = null;
+        Node right = null;
+    
+        Node(int val) {
+          this.val = val;
+        }
+    }
+      
+    static Node pr , head , tail;
+    
+    public static Node bToDLL(Node root) {
+        pr = head = tail = null;
+        
+        treetoll(root);
+        tail = pr;
+        
+        tail.right = head;
+        head.left = tail;
+        
+        return head;
+    }
+      
+    public static void treetoll(Node root){
+        if(root == null) return;
+        
+        treetoll(root.left);
+        
+        if(pr == null){
+            head = root;
+        }
+        else{
+            pr.right = root;
+            root.left = pr;
+        }
+        pr = root;
+        
+        treetoll(root.right);
+    }
 }
