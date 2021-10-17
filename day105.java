@@ -41,4 +41,43 @@ public class day105 {
         
         return rm;
     }
+
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        
+        TreeNode cur = root;
+        
+        while(cur != null){
+            
+            TreeNode rc = cur.right;
+            
+            if(rc == null){
+                res.add(cur.val);
+                cur = cur.left;
+            } 
+            else{
+                TreeNode lm = getleftNode(cur , rc);
+                
+                if(lm.left == cur){
+                    lm.left = null;
+                    cur = cur.left;
+                }
+                else if(lm.left == null){
+                    res.add(cur.val);
+                    lm.left = cur;
+                    cur = cur.right;
+                }
+            }
+        }
+        Collections.reverse(res);
+        return res;
+    }
+    
+    public TreeNode getleftNode(TreeNode cur , TreeNode rc){
+        TreeNode lm = rc;
+        
+        while(lm.left != null && lm.left != cur) lm = lm.left;
+        
+        return lm;
+    }
 }
