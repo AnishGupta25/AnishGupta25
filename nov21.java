@@ -71,6 +71,9 @@ public class nov21 {
             this.next = next;
             this.val = val;
         }
+        ListNode(int val){
+            this.val = val;
+        }
     }
 
     public boolean hasCycle(ListNode head) {
@@ -85,5 +88,26 @@ public class nov21 {
             if(fast == slow) return true;
         }
         return false;
+    }
+
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode res = new ListNode(-1);
+        ListNode r = res;
+        while(l1 != null && l2 != null){
+            if(l1.val <= l2.val){
+                r.next = l1;
+                l1 = l1.next;
+                r = r.next;
+            }
+            else if(l2.val < l1.val){
+                r.next = l2;
+                l2 = l2.next;
+                r = r.next;
+            }
+        }
+        if(l1 != null) r.next = l1;
+        if(l2 != null) r.next = l2;
+        
+        return res.next;
     }
 }
