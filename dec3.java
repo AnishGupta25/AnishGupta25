@@ -30,4 +30,18 @@ public class dec3 {
         }
         return ans;
     }
+
+    public int[] searchRange(int[] nums, int target) {
+        int[] arr = {-1 , -1};
+        boolean flag = false;
+        for(int i = 0; i < nums.length; i++){
+            if(nums[i] == target && !flag){
+                arr[0] = i;
+                arr[1] = i;
+                flag = true;
+            } 
+            else if(nums[i] == target && flag) arr[1] = i;
+        }
+        return arr;
+    }
 }
