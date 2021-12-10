@@ -1,4 +1,3 @@
-import java.util.*;
 public class nov22 {
     class ListNode{
         int val;
