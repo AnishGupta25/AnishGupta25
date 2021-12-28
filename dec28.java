@@ -45,4 +45,18 @@ public class dec28 {
         
         return b_Head.next;
     }
+
+    public int countSegments(String s) {
+        if(s.length()== 0){
+            return 0;
+        }
+        int count = 0;
+        String[] str = s.split(" ",0);
+		for(String a:str){
+            if(a.length()!=0){
+                count++;
+            }
+        }
+        return count;
+    }
 }
