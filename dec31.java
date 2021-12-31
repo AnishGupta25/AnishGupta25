@@ -1,3 +1,4 @@
+import java.util.*;
 public class dec31 {
     class TreeNode{
         int val;
@@ -78,4 +79,19 @@ public class dec31 {
         }
         return true;
     }
+
+    public int[][] intervalIntersection(int[][] A, int[][] B) {
+        ArrayList<int[]> ans = new ArrayList();
+        int i = 0, j = 0;
+    
+        while (i < A.length && j < B.length) {
+          int lo = Math.max(A[i][0], B[j][0]);
+          int hi = Math.min(A[i][1], B[j][1]);
+          if (lo <= hi) ans.add(new int[]{lo, hi});
+    
+          if (A[i][1] < B[j][1]) i++;
+          else j++;
+        }
+        return ans.toArray(new int[ans.size()][]);
+      }
 }
