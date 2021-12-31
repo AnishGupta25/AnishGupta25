@@ -20,4 +20,27 @@ public class dec31 {
         
         return Math.max(left , right);
     }
+
+    public int maxArea(int[] height) {
+        int left = 0;
+        int right = height.length - 1;
+        int Area = 0;
+        
+        while(left < right){
+            int width = height[left] < height[right] ? height[left] : height[right];
+            int length = right - left;
+            int curArea = length * width;
+            
+            if(curArea > Area){
+                Area = curArea;
+            }
+            if(height[left] < height[right]){
+                left++;
+            }
+            else{
+                right--;
+            }
+        }
+        return Area;
+    }
 }
