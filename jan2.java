@@ -12,4 +12,17 @@ public class jan2 {
         }
         return i == name.length();
     }
+
+    public int[] getModifiedArray(int length, int[][] updates) {
+        int[] arr = new int[length];
+        for(int k = 0; k < updates.length; k++){
+            arr[updates[k][0]] += updates[k][2];
+            if((updates[k][1]+1) < length) arr[updates[k][1]+1] -= updates[k][2];
+        }
+
+        for(int i = 1; i < length; i++){
+            arr[i] += arr[i-1];
+        }
+        return arr;
+    }
 }
