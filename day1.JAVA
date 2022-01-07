@@ -1,4 +1,4 @@
-public class Main{
+public class day1{
     public static class Node{
         int data;
         Node next;
