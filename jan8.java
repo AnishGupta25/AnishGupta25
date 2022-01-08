@@ -45,4 +45,27 @@ public class jan8 {
        
         return res;
     }
+    public String reverseVowels(String s) {
+        int l = 0 , r = s.length() - 1;
+        
+        char[] arr = s.toCharArray();
+        while(l < r){
+            if(isVowel(arr[l]) && isVowel(arr[r])){
+                char ch = arr[l];
+                arr[l] = arr[r];
+                arr[r] = ch;
+                l++;
+                r--;
+            }
+            else if(!isVowel(arr[l]) && isVowel(arr[r])) l++;
+            else r--;
+        }
+        return new String(arr);
+    }
+    
+    public boolean isVowel(char ch){
+        String vowels = "aeiouAEIOU";
+        int idx = vowels.indexOf(ch);
+        return idx != -1;
+    }
 }
