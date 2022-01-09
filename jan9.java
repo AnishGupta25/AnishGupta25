@@ -48,4 +48,15 @@ public class jan9 {
         }
         return Math.max((min1 * min2 * max1) , (max1 * max2 * max3));
     }
+
+    public int maxChunksToSorted(int[] arr) {
+        int chunks=0;
+        int maxSoFar=-1;
+        for(int i=0;i<arr.length;i++){
+            maxSoFar=Math.max(maxSoFar,arr[i]);
+            if(maxSoFar<=i)
+                chunks++;
+        }
+        return chunks;
+    }
 }
