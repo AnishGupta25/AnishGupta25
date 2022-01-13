@@ -14,4 +14,17 @@ public class jan13 {
         }
         return arrows;
     }
+
+    public String complexNumberMultiply(String num1, String num2) {
+        String eq1[] = num1.split("\\+|i");
+        String eq2[] = num2.split("\\+|i");
+        
+        int a = Integer.parseInt(eq1[0]);
+        int b = Integer.parseInt(eq1[1]);
+        
+        int c = Integer.parseInt(eq2[0]);
+        int d = Integer.parseInt(eq2[1]);
+        
+        return (a * c - b * d) + "+" + (a * d + b * c) + "i";
+    }
 }
