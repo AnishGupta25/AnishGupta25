@@ -1,4 +1,9 @@
+import java.util.*;
 public class jan26 {
+    class TreeNode{
+        TreeNode left , right;
+        int val;
+    }
     public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
         List<Integer> res = new ArrayList<>();
         List<Integer> t1 = new ArrayList<>();
